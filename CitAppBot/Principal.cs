@@ -115,5 +115,16 @@ namespace CitAppBot
         {
             ActivateButton(sender, fourthColor);
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Reset();
+        }
+
+        private void Reset()
+        {
+            DisableButton();
+            leftBorderBtn.Visible = false;
+        }
     }
 }

@@ -8,14 +8,17 @@ namespace ENTITY
 {
     public class Administrador
     {
-        public string Nombre { get; set; }
+        public int IdUsuario { get; set; }
+        public string Usuario { get; set; }
         public string Contrasena { get; set; }
+        public int IdRol { get; set; }
+        public string NombreRol { get; set; }
 
         public Administrador() { }
 
-        public Administrador(string nombre, string contrasena)
+        public Administrador(string usuario, string contrasena)
         {
-            Nombre = nombre;
+            Usuario = usuario;
             Contrasena = contrasena;
         }
     }

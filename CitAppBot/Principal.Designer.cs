@@ -1,4 +1,5 @@
-﻿namespace CitAppBot
+﻿
+namespace CitAppBot
 {
     partial class FrmPrincipal
     {
@@ -35,12 +36,19 @@
             IBpacientes = new FontAwesome.Sharp.IconButton();
             IBcitas = new FontAwesome.Sharp.IconButton();
             panelLogo = new Panel();
+            pictureBox1 = new PictureBox();
+            PanelTtl = new Panel();
+            IP = new FontAwesome.Sharp.IconPictureBox();
             panelMenu.SuspendLayout();
+            panelLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            PanelTtl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)IP).BeginInit();
             SuspendLayout();
             // 
             // panelMenu
             // 
-            panelMenu.BackColor = SystemColors.ControlDarkDark;
+            panelMenu.BackColor = Color.FromArgb(0, 64, 64);
             panelMenu.Controls.Add(IBagregarmedico);
             panelMenu.Controls.Add(IBagregarpaciente);
             panelMenu.Controls.Add(IBgestion);
@@ -56,6 +64,7 @@
             // 
             // IBagregarmedico
             // 
+            IBagregarmedico.BackColor = Color.Teal;
             IBagregarmedico.Dock = DockStyle.Top;
             IBagregarmedico.IconChar = FontAwesome.Sharp.IconChar.Vcard;
             IBagregarmedico.IconColor = Color.Black;
@@ -70,11 +79,12 @@
             IBagregarmedico.Text = "Agregar médico";
             IBagregarmedico.TextAlign = ContentAlignment.MiddleLeft;
             IBagregarmedico.TextImageRelation = TextImageRelation.ImageBeforeText;
-            IBagregarmedico.UseVisualStyleBackColor = true;
+            IBagregarmedico.UseVisualStyleBackColor = false;
             IBagregarmedico.Click += IBagregarmedico_Click;
             // 
             // IBagregarpaciente
             // 
+            IBagregarpaciente.BackColor = Color.Teal;
             IBagregarpaciente.Dock = DockStyle.Top;
             IBagregarpaciente.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
             IBagregarpaciente.IconColor = Color.Black;
@@ -89,11 +99,12 @@
             IBagregarpaciente.Text = "Agregar paciente";
             IBagregarpaciente.TextAlign = ContentAlignment.MiddleLeft;
             IBagregarpaciente.TextImageRelation = TextImageRelation.ImageBeforeText;
-            IBagregarpaciente.UseVisualStyleBackColor = true;
+            IBagregarpaciente.UseVisualStyleBackColor = false;
             IBagregarpaciente.Click += iconButton4_Click;
             // 
             // IBgestion
             // 
+            IBgestion.BackColor = Color.Teal;
             IBgestion.Dock = DockStyle.Top;
             IBgestion.IconChar = FontAwesome.Sharp.IconChar.Sliders;
             IBgestion.IconColor = Color.Black;
@@ -108,11 +119,12 @@
             IBgestion.Text = "Gestión";
             IBgestion.TextAlign = ContentAlignment.MiddleLeft;
             IBgestion.TextImageRelation = TextImageRelation.ImageBeforeText;
-            IBgestion.UseVisualStyleBackColor = true;
+            IBgestion.UseVisualStyleBackColor = false;
             IBgestion.Click += IBgestion_Click;
             // 
             // IBmedicos
             // 
+            IBmedicos.BackColor = Color.Teal;
             IBmedicos.Dock = DockStyle.Top;
             IBmedicos.IconChar = FontAwesome.Sharp.IconChar.UserDoctor;
             IBmedicos.IconColor = Color.Black;
@@ -127,11 +139,12 @@
             IBmedicos.Text = "Médicos";
             IBmedicos.TextAlign = ContentAlignment.MiddleLeft;
             IBmedicos.TextImageRelation = TextImageRelation.ImageBeforeText;
-            IBmedicos.UseVisualStyleBackColor = true;
+            IBmedicos.UseVisualStyleBackColor = false;
             IBmedicos.Click += IBmedicos_Click;
             // 
             // IBpacientes
             // 
+            IBpacientes.BackColor = Color.Teal;
             IBpacientes.Dock = DockStyle.Top;
             IBpacientes.IconChar = FontAwesome.Sharp.IconChar.PeopleGroup;
             IBpacientes.IconColor = Color.Black;
@@ -146,11 +159,12 @@
             IBpacientes.Text = "Pacientes";
             IBpacientes.TextAlign = ContentAlignment.MiddleLeft;
             IBpacientes.TextImageRelation = TextImageRelation.ImageBeforeText;
-            IBpacientes.UseVisualStyleBackColor = true;
+            IBpacientes.UseVisualStyleBackColor = false;
             IBpacientes.Click += IBpacientes_Click;
             // 
             // IBcitas
             // 
+            IBcitas.BackColor = Color.Teal;
             IBcitas.Dock = DockStyle.Top;
             IBcitas.IconChar = FontAwesome.Sharp.IconChar.Calendar;
             IBcitas.IconColor = Color.Black;
@@ -165,11 +179,13 @@
             IBcitas.Text = "Citas";
             IBcitas.TextAlign = ContentAlignment.MiddleLeft;
             IBcitas.TextImageRelation = TextImageRelation.ImageBeforeText;
-            IBcitas.UseVisualStyleBackColor = true;
+            IBcitas.UseVisualStyleBackColor = false;
             IBcitas.Click += IBcitas_Click;
             // 
             // panelLogo
             // 
+            panelLogo.BackColor = Color.FromArgb(0, 64, 64);
+            panelLogo.Controls.Add(pictureBox1);
             panelLogo.Dock = DockStyle.Top;
             panelLogo.Location = new Point(0, 0);
             panelLogo.Name = "panelLogo";
@@ -178,17 +194,63 @@
             panelLogo.TabIndex = 0;
             panelLogo.Paint += panel1_Paint;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Captura_de_pantalla_2025_05_22_114858_removebg_preview;
+            pictureBox1.Location = new Point(15, 18);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(169, 101);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
+            // PanelTtl
+            // 
+            PanelTtl.BackColor = Color.FromArgb(0, 64, 64);
+            PanelTtl.Controls.Add(IP);
+            PanelTtl.Dock = DockStyle.Top;
+            PanelTtl.Location = new Point(220, 0);
+            PanelTtl.Name = "PanelTtl";
+            PanelTtl.Size = new Size(1106, 80);
+            PanelTtl.TabIndex = 1;
+            // 
+            // IP
+            // 
+            //IP.BackColor = Color.FromArgb(0, 64, 64);
+            //IP.ForeColor = SystemColors.ControlText;
+            //IP.IconChar = FontAwesome.Sharp.IconChar.Home;
+            //IP.IconColor = SystemColors.ControlText;
+            //IP.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            //IP.IconSize = 40;
+            //IP.Location = new Point(22, 28);
+            //IP.Name = "IP";
+            //IP.Size = new Size(40, 40);
+            //IP.TabIndex = 0;
+            //IP.TabStop = false;
+            //IP.Click += IP_Click;
+            // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1326, 671);
+            Controls.Add(PanelTtl);
             Controls.Add(panelMenu);
             Name = "FrmPrincipal";
             Text = "Principal";
             Load += FrmPrincipal_Load;
             panelMenu.ResumeLayout(false);
+            panelLogo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            PanelTtl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)IP).EndInit();
             ResumeLayout(false);
+        }
+
+        private void IP_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -201,5 +263,8 @@
         private FontAwesome.Sharp.IconButton IBmedicos;
         private FontAwesome.Sharp.IconButton IBpacientes;
         private FontAwesome.Sharp.IconButton IBagregarmedico;
+        private PictureBox pictureBox1;
+        private Panel PanelTtl;
+        private FontAwesome.Sharp.IconPictureBox IP;
     }
 }

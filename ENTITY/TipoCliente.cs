@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ENTITY
 {
-    public enum TipoCliente
+    public enum TipoPaciente
     {
         Regular,
         Preferencial,

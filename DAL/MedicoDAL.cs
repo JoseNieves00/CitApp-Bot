@@ -1,31 +1,137 @@
 ﻿using ENTITY;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DAL
 {
-    public class MedicoDAL
+    public class MedicoDAL : Database
     {
-        private static List<Medico> listaMedicos = new List<Medico>();
-
-        public static void AgregarMedico(Medico medico)
+        public void AgregarMedico(Medico medico)
         {
-            listaMedicos.Add(medico);
+            try
+            {
+                AbrirConexion();
+
+                string query = @"
+                    INSERT INTO Medico (Cedula, Nombre, IdEspecialidad) 
+                    VALUES (@Cedula, @Nombre, @IdEspecialidad);";
+
+                using (SqlCommand cmd = new SqlCommand(query, Connection))
+                {
+                    cmd.Parameters.AddWithValue("@Cedula", medico.Cedula);
+                    cmd.Parameters.AddWithValue("@Nombre", medico.Nombre);
+                    cmd.Parameters.AddWithValue("@IdEspecialidad", (int)medico.Especialidad);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            finally
+            {
+                CerrarConexion();
+            }
         }
 
-        public static List<Medico> ListarMedicos()
+        public List<Medico> ListarMedicos()
         {
-            return listaMedicos;
+            List<Medico> lista = new List<Medico>();
+
+            try
+            {
+                AbrirConexion();
+
+                string query = "SELECT Cedula, Nombre, IdEspecialidad FROM Medico";
+
+                using (SqlCommand cmd = new SqlCommand(query, Connection))
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lista.Add(new Medico
+                        {
+                            Cedula = reader.GetString(0),
+                            Nombre = reader.GetString(1),
+                            Especialidad = (Especialidad)reader.GetInt32(2)
+                        });
+                    }
+                }
+            }
+            finally
+            {
+                CerrarConexion();
+            }
+
+            return lista;
         }
 
-        public static Medico BuscarPorCedula(string cedula)
+        public Medico BuscarPorCedula(string cedula)
         {
-            return listaMedicos.FirstOrDefault(m => m.Cedula == cedula);
+            try
+            {
+                AbrirConexion();
+
+                string query = "SELECT Cedula, Nombre, IdEspecialidad FROM Medico WHERE Cedula = @Cedula";
+
+                using (SqlCommand cmd = new SqlCommand(query, Connection))
+                {
+                    cmd.Parameters.AddWithValue("@Cedula", cedula);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Medico
+                            {
+                                Cedula = reader.GetString(0),
+                                Nombre = reader.GetString(1),
+                                Especialidad = (Especialidad)reader.GetInt32(2)
+                            };
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                CerrarConexion();
+            }
+
+            return null;
         }
 
-        public static List<Medico> FiltrarPorEspecialidad(Especialidad especialidad)
+        public List<Medico> FiltrarPorEspecialidad(Especialidad especialidad)
         {
-            return listaMedicos.Where(m => m.Especialidad == especialidad).ToList();
+            List<Medico> lista = new List<Medico>();
+
+            try
+            {
+                AbrirConexion();
+
+                string query = "SELECT Cedula, Nombre, IdEspecialidad FROM Medico WHERE IdEspecialidad = @IdEspecialidad";
+
+                using (SqlCommand cmd = new SqlCommand(query, Connection))
+                {
+                    cmd.Parameters.AddWithValue("@IdEspecialidad", (int)especialidad);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lista.Add(new Medico
+                            {
+                                Cedula = reader.GetString(0),
+                                Nombre = reader.GetString(1),
+                                Especialidad = (Especialidad)reader.GetInt32(2)
+                            });
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                CerrarConexion();
+            }
+
+            return lista;
         }
     }
 }
