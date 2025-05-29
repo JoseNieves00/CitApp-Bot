@@ -9,7 +9,7 @@ namespace ENTITY
     public class Cita
     {
         public int IdCita { get; set; }
-        public Cliente Cliente { get; set; }
+        public Paciente Paciente { get; set; }
         public Medico Medico { get; set; }
         public DateTime Fecha { get; set; }
         public TimeSpan Hora { get; set; } // "06:00", "07:27", etc.
@@ -18,10 +18,10 @@ namespace ENTITY
 
         public Cita() { }
 
-        public Cita(int idCita, Cliente cliente, Medico medico, DateTime fecha, TimeSpan hora, decimal valor, string estado)
+        public Cita(int idCita, Paciente Paciente, Medico medico, DateTime fecha, TimeSpan hora, decimal valor, string estado)
         {
             IdCita = idCita;
-            Cliente = cliente;
+            Paciente = Paciente;
             Medico = medico;
             Fecha = fecha;
             Hora = hora;

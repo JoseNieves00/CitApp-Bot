@@ -1835,11 +1835,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\Pr3Project\\CitAppBot\\CitAppBot\\CitAppBot.csproj",
+      "projectUniqueName": "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\git3\\CitApp-Bot\\CitAppBot\\CitAppBot.csproj",
       "projectName": "CitAppBot",
-      "projectPath": "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\Pr3Project\\CitAppBot\\CitAppBot\\CitAppBot.csproj",
+      "projectPath": "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\git3\\CitApp-Bot\\CitAppBot\\CitAppBot.csproj",
       "packagesPath": "C:\\Users\\JUAN JOSE\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\Pr3Project\\CitAppBot\\CitAppBot\\obj\\",
+      "outputPath": "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\git3\\CitApp-Bot\\CitAppBot\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1860,14 +1860,14 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\Pr3Project\\CitAppBot\\BLL\\BLL.csproj": {
-              "projectPath": "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\Pr3Project\\CitAppBot\\BLL\\BLL.csproj"
+            "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\git3\\CitApp-Bot\\BLL\\BLL.csproj": {
+              "projectPath": "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\git3\\CitApp-Bot\\BLL\\BLL.csproj"
             },
-            "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\Pr3Project\\CitAppBot\\DAL\\DAL.csproj": {
-              "projectPath": "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\Pr3Project\\CitAppBot\\DAL\\DAL.csproj"
+            "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\git3\\CitApp-Bot\\DAL\\DAL.csproj": {
+              "projectPath": "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\git3\\CitApp-Bot\\DAL\\DAL.csproj"
             },
-            "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\Pr3Project\\CitAppBot\\ENTITY\\ENTITY.csproj": {
-              "projectPath": "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\Pr3Project\\CitAppBot\\ENTITY\\ENTITY.csproj"
+            "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\git3\\CitApp-Bot\\ENTITY\\ENTITY.csproj": {
+              "projectPath": "C:\\Users\\JUAN JOSE\\OneDrive\\Desktop\\git3\\CitApp-Bot\\ENTITY\\ENTITY.csproj"
             }
           }
         }

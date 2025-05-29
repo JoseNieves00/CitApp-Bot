@@ -1,39 +1,57 @@
 ﻿using ENTITY;
 using Microsoft.Data.SqlClient;
-using System.Collections.Generic;
-using System.Linq;
+using System;
+using System.Data;
 
 namespace DAL
 {
     public class AdministradorDAL : Database
     {
-        public bool ValidarLogin(Administrador admin)
+        public Administrador ObtenerAdministrador(string usuario, string contrasena)
         {
             try
             {
                 AbrirConexion();
 
-                string query = "SELECT COUNT(*) FROM Administrador WHERE Nombre = @nombre AND Contrasena = @contrasena";
-                SqlCommand cmd = new SqlCommand(query, Connection);
-                cmd.Parameters.AddWithValue("@nombre", admin.Nombre);
-                cmd.Parameters.AddWithValue("@contrasena", admin.Contrasena);
+                string query = @"
+                    SELECT u.IdUsuario, u.Usuario, u.Contrasena, r.IdRol, r.NombreRol
+                    FROM Usuario u
+                    INNER JOIN Rol r ON u.IdRol = r.IdRol
+                    WHERE u.Usuario = @usuario AND u.Contrasena = @contrasena";
 
-                int count = (int)cmd.ExecuteScalar();
-                return count > 0;
+                using (SqlCommand cmd = new SqlCommand(query, Connection))
+                {
+                    cmd.Parameters.AddWithValue("@usuario", usuario);
+                    cmd.Parameters.AddWithValue("@contrasena", contrasena);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Administrador
+                            {
+                                IdUsuario = reader.GetInt32(0),
+                                Usuario = reader.GetString(1),
+                                Contrasena = reader.GetString(2),
+                                IdRol = reader.GetInt32(3),
+                                NombreRol = reader.GetString(4)
+                            };
+                        }
+                    }
+                }
+
+                return null;
             }
             finally
             {
                 CerrarConexion();
             }
         }
-        private static List<Administrador> listaAdmins = new List<Administrador>()
-        {
-            new Administrador("admin", "1234") 
-        };
 
-        public static Administrador ValidarLogin(string nombre, string contrasena)
+        public bool ValidarLogin(string usuario, string contrasena)
         {
-            return listaAdmins.FirstOrDefault(a => a.Nombre == nombre && a.Contrasena == contrasena);
+            var admin = ObtenerAdministrador(usuario, contrasena);
+            return admin != null && admin.NombreRol == "Administrador";
         }
     }
 }

@@ -10,11 +10,13 @@ namespace BLL
 {
     public class MedicoBLL
     {
+        private static MedicoDAL medicoDAL = new MedicoDAL();
+
         public static bool RegistrarMedico(Medico medico)
         {
-            if (MedicoDAL.BuscarPorCedula(medico.Cedula) == null)
+            if (medicoDAL.BuscarPorCedula(medico.Cedula) == null)
             {
-                MedicoDAL.AgregarMedico(medico);
+                medicoDAL.AgregarMedico(medico);
                 return true;
             }
             return false;
@@ -22,12 +24,12 @@ namespace BLL
 
         public static List<Medico> ObtenerPorEspecialidad(Especialidad especialidad)
         {
-            return MedicoDAL.FiltrarPorEspecialidad(especialidad);
+            return medicoDAL.FiltrarPorEspecialidad(especialidad);
         }
 
         public static Medico ObtenerMedico(string cedula)
         {
-            return MedicoDAL.BuscarPorCedula(cedula);
+            return medicoDAL.BuscarPorCedula(cedula);
         }
     }
 }
