@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CitAppBot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8fd8ea94dd771a79719a1c9ff32705366156e2b4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f08969e4e2aea75845ea3ba5c8c4c3b1186c87f")]
 [assembly: System.Reflection.AssemblyProductAttribute("CitAppBot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CitAppBot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
