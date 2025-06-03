@@ -148,3 +148,8 @@ C:\Users\JUAN JOSE\OneDrive\Desktop\git3\CitApp-Bot\CitAppBot\obj\Debug\net8.0-w
 C:\Users\JUAN JOSE\OneDrive\Desktop\git3\CitApp-Bot\CitAppBot\obj\Debug\net8.0-windows\CitAppBot.pdb
 C:\Users\JUAN JOSE\OneDrive\Desktop\git3\CitApp-Bot\CitAppBot\obj\Debug\net8.0-windows\CitAppBot.genruntimeconfig.cache
 C:\Users\JUAN JOSE\OneDrive\Desktop\git3\CitApp-Bot\CitAppBot\obj\Debug\net8.0-windows\ref\CitAppBot.dll
+C:\Users\JUAN JOSE\OneDrive\Desktop\git3\CitApp-Bot\CitAppBot\obj\Debug\net8.0-windows\CitAppBot.FrmAgregarMedico.resources
+C:\Users\JUAN JOSE\OneDrive\Desktop\git3\CitApp-Bot\CitAppBot\obj\Debug\net8.0-windows\CitAppBot.FrmAgregarPaciente.resources
+C:\Users\JUAN JOSE\OneDrive\Desktop\git3\CitApp-Bot\CitAppBot\obj\Debug\net8.0-windows\CitAppBot.FrmCitas.resources
+C:\Users\JUAN JOSE\OneDrive\Desktop\git3\CitApp-Bot\CitAppBot\obj\Debug\net8.0-windows\CitAppBot.FrmMedicos.resources
+C:\Users\JUAN JOSE\OneDrive\Desktop\git3\CitApp-Bot\CitAppBot\obj\Debug\net8.0-windows\CitAppBot.FrmPacientes.resources

@@ -18,6 +18,7 @@ namespace CitAppBot
         // Campos
         private IconButton currentBtn;
         private Panel leftBorderBtn;
+        
 
         // Colores
         private Color primaryColor = Color.FromArgb(0, 120, 100);
@@ -46,7 +47,7 @@ namespace CitAppBot
                 leftBorderBtn.BringToFront();
 
                 iconPictureChild.IconChar = currentBtn.IconChar;
-                 
+
             }
         }
 
@@ -137,6 +138,11 @@ namespace CitAppBot
         }
 
         private void iconPictureChild_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TituloHijo_Click(object sender, EventArgs e)
         {
 
         }

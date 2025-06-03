@@ -38,8 +38,8 @@ namespace CitAppBot
             panelLogo = new Panel();
             pictureBox1 = new PictureBox();
             PanelTtl = new Panel();
-            iconPictureChild = new FontAwesome.Sharp.IconPictureBox();
             TituloHijo = new Label();
+            iconPictureChild = new FontAwesome.Sharp.IconPictureBox();
             panelMenu.SuspendLayout();
             panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -217,6 +217,16 @@ namespace CitAppBot
             PanelTtl.Size = new Size(833, 80);
             PanelTtl.TabIndex = 1;
             // 
+            // TituloHijo
+            // 
+            TituloHijo.AutoSize = true;
+            TituloHijo.Location = new Point(67, 27);
+            TituloHijo.Name = "TituloHijo";
+            TituloHijo.Size = new Size(50, 20);
+            TituloHijo.TabIndex = 1;
+            TituloHijo.Text = "label1";
+            TituloHijo.Click += TituloHijo_Click;
+            // 
             // iconPictureChild
             // 
             iconPictureChild.BackColor = Color.FromArgb(0, 64, 64);
@@ -231,15 +241,6 @@ namespace CitAppBot
             iconPictureChild.TabIndex = 0;
             iconPictureChild.TabStop = false;
             iconPictureChild.Click += iconPictureChild_Click;
-            // 
-            // TituloHijo
-            // 
-            TituloHijo.AutoSize = true;
-            TituloHijo.Location = new Point(67, 27);
-            TituloHijo.Name = "TituloHijo";
-            TituloHijo.Size = new Size(50, 20);
-            TituloHijo.TabIndex = 1;
-            TituloHijo.Text = "label1";
             // 
             // FrmPrincipal
             // 
