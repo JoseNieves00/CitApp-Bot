@@ -2,6 +2,7 @@
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace DAL
 {
@@ -31,31 +32,28 @@ namespace DAL
             }
         }
 
-        public List<Medico> ListarMedicos()
+        public DataTable ListarMedicos()
         {
-            List<Medico> lista = new List<Medico>();
+            DataTable dt = new DataTable();
 
             try
             {
                 AbrirConexion();
 
-                string query = "SELECT Cedula, Nombre, IdEspecialidad FROM Medico";
+                string query = @"
+                    SELECT 
+                        M.idMedico, 
+                        M.nombre, 
+                        E.nombre AS especialidad 
+                    FROM 
+                        medico M
+                    INNER JOIN 
+                        especialidad E ON M.idEspecialidad = E.idEspecialidad";
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand(query, Connection))
-                using (var reader = cmd.ExecuteReader())
+                using (NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd))
                 {
-                    while (reader.Read())
-                    {
-                        lista.Add(new Medico
-                        {
-                            Cedula = reader.GetString(0),
-                            Nombre = reader.GetString(1),
-                            Especialidad = new Especialidad
-                            {
-                                Id = reader.GetInt32(2)
-                            }
-                        });
-                    }
+                    da.Fill(dt);
                 }
             }
             finally
@@ -63,7 +61,7 @@ namespace DAL
                 CerrarConexion();
             }
 
-            return lista;
+            return dt;
         }
 
         public Medico BuscarPorCedula(string cedula)

@@ -6,6 +6,8 @@ using Telegram.Bot.Types;
 using System.Data.SqlClient;
 using Npgsql;
 using BLL;
+using System.Data;
+using ENTITY;
 
 namespace CitAppBot
 {
@@ -15,68 +17,8 @@ namespace CitAppBot
         {
             InitializeComponent();
         }
-
-        TelegramBotClient BotClient;
-
-        private UsuarioBLL adminBLL = new UsuarioBLL();
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            BotClient = new TelegramBotClient("7698032170:AAH9X71n_lxRv2QNjYvpki3V6ctOtUBKfJI");
-            StartReceive();
-
-        }
-
-        public async Task StartReceive()
-        {
-            var token = new CancellationTokenSource();
-            var cancelToken = token.Token;
-            var ReOpt = new ReceiverOptions { AllowedUpdates = { } };
-            await BotClient.ReceiveAsync(OnMessage, ErrorMessage, ReOpt, cancelToken);
-        }
-
-        public async Task OnMessage(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
-        {
-            if (update.Message is Telegram.Bot.Types.Message message)
-            {
-                var inLineKeyboard = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardMarkup(new[]
-                {
-                   new []{
-                    Telegram.Bot.Types.ReplyMarkups.InlineKeyboardButton.WithCallbackData("Salchipapa1"),
-                    Telegram.Bot.Types.ReplyMarkups.InlineKeyboardButton.WithCallbackData("Salchipapa2"),
-                   },
-                   new []{
-                    Telegram.Bot.Types.ReplyMarkups.InlineKeyboardButton.WithCallbackData("Salchipapa3"),
-                   }
-
-               });
-
-                await BotClient.SendTextMessageAsync(
-                        chatId: message.Chat.Id,
-                        text: "¿ Que salchipapa deseas ?",
-                        replyMarkup: inLineKeyboard,
-                        cancellationToken: cancellationToken
-                    );
-            }
-
-            if (update.CallbackQuery != null)
-            {
-                var callbackQuery = update.CallbackQuery;
-                await BotClient.SendTextMessageAsync(
-                        chatId: callbackQuery.Message.Chat.Id,
-                        text: $"Tu salchipapa elegida es: {callbackQuery.Data}",
-                        cancellationToken: cancellationToken
-                    );
-            }
-        }
-
-        public async Task ErrorMessage(ITelegramBotClient botClient, Exception e, CancellationToken cancellationToken)
-        {
-            if (e is ApiRequestException requestException)
-            {
-                await BotClient.SendTextMessageAsync("", e.Message.ToString());
-
-            }
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -89,23 +31,58 @@ namespace CitAppBot
 
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void limpiarCampos()
+        {
+            txtUser.Clear();
+            txtPassword.Clear();
+        }
+
+        private void IniciarSesion()
         {
             string usuario = txtUser.Text.Trim();
-            string contrasena = txtPassword.Text.Trim();
+            string clave = txtPassword.Text.Trim();
 
-            bool acceso = adminBLL.Login(usuario, contrasena);
-
-            if (acceso)
+            if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(clave))
             {
-                MessageBox.Show("Bienvenido");
-                FrmPrincipal frm = new FrmPrincipal();
-                frm.Show();
+                MessageBox.Show("Ingrese usuario y clave.");
+                return;
+            }
+
+            DataTable dt = UsuarioBLL.ValidarLogin(usuario, clave);
+
+            if (dt.Rows.Count > 0)
+            {
+                // Guardar sesión
+                UsuarioSession.IdUsuario = Convert.ToInt32(dt.Rows[0]["idusuario"]);
+                UsuarioSession.NombreUsuario = dt.Rows[0]["usuario"].ToString();
+                UsuarioSession.IdRol = Convert.ToInt32(dt.Rows[0]["idrol"]);
+                UsuarioSession.NombreRol = dt.Rows[0]["nombrerol"].ToString();
+                UsuarioSession.CedulaPersona = dt.Rows[0]["cedulapersona"].ToString();
+
+                // Abrir menú principal
+                FrmPrincipal menu = new FrmPrincipal();
+                menu.Show();
                 this.Hide();
             }
             else
             {
-                MessageBox.Show("Credenciales incorrectas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Usuario o clave incorrecta.");
+                limpiarCampos();
+                txtUser.Focus();
+            }
+        }
+
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            IniciarSesion();
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin.PerformClick();
             }
         }
     }

@@ -1,16 +1,19 @@
 ﻿using System;
 using ENTITY;
 using DAL;
+using System.Data;
 
 namespace BLL
 {
     public class UsuarioBLL
     {
-        private UsuarioDAL adminDAL = new UsuarioDAL();
+        private static UsuarioDAL dal = new UsuarioDAL();
 
-        public bool Login(string nombre, string contrasena)
+        public static DataTable ValidarLogin(string usuario, string clave)
         {
-            return adminDAL.ValidarLogin(nombre, contrasena);
+            return dal.ValidarLogin(usuario, clave);
         }
+
+
     }
 }

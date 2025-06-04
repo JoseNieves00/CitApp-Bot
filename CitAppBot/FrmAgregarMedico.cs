@@ -96,9 +96,26 @@ namespace CitAppBot
             }
         }
 
+        private void limpiarCampos()
+        {
+            txtNombre.Clear();
+            txtCedula.Clear();
+            cmbEspecialidad.SelectedIndex = 0;
+        }
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             AgregarMedico();
+        }
+
+        private void IBlimpiar_Click(object sender, EventArgs e)
+        {
+            limpiarCampos();
+        }
+
+        private void IBsalir_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

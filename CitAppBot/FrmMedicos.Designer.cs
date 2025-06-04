@@ -29,32 +29,42 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            dtgvMedicos = new DataGridView();
             comboBoxVerMedicos = new ComboBox();
             label2 = new Label();
             label1 = new Label();
-            vScrollBarMedicos = new VScrollBar();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dtgvMedicos).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.GradientActiveCaption;
+            panel1.Controls.Add(dtgvMedicos);
             panel1.Controls.Add(comboBoxVerMedicos);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(vScrollBarMedicos);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(4, 4, 4, 4);
+            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
             panel1.Size = new Size(1120, 879);
             panel1.TabIndex = 1;
+            // 
+            // dtgvMedicos
+            // 
+            dtgvMedicos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtgvMedicos.Location = new Point(372, 54);
+            dtgvMedicos.Name = "dtgvMedicos";
+            dtgvMedicos.RowHeadersWidth = 72;
+            dtgvMedicos.Size = new Size(722, 787);
+            dtgvMedicos.TabIndex = 4;
             // 
             // comboBoxVerMedicos
             // 
             comboBoxVerMedicos.FormattingEnabled = true;
             comboBoxVerMedicos.Location = new Point(44, 318);
-            comboBoxVerMedicos.Margin = new Padding(4, 4, 4, 4);
+            comboBoxVerMedicos.Margin = new Padding(4);
             comboBoxVerMedicos.Name = "comboBoxVerMedicos";
             comboBoxVerMedicos.Size = new Size(274, 38);
             comboBoxVerMedicos.TabIndex = 3;
@@ -79,25 +89,19 @@
             label1.TabIndex = 1;
             label1.Text = "Médicos";
             // 
-            // vScrollBarMedicos
-            // 
-            vScrollBarMedicos.Location = new Point(370, 14);
-            vScrollBarMedicos.Name = "vScrollBarMedicos";
-            vScrollBarMedicos.Size = new Size(447, 762);
-            vScrollBarMedicos.TabIndex = 0;
-            vScrollBarMedicos.Scroll += vScrollBarMedicos_Scroll;
-            // 
             // FrmMedicos
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1120, 879);
             Controls.Add(panel1);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "FrmMedicos";
             Text = "FrmMedicos";
+            Load += FrmMedicos_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dtgvMedicos).EndInit();
             ResumeLayout(false);
         }
 
@@ -108,5 +112,6 @@
         private Label label2;
         private Label label1;
         private VScrollBar vScrollBarMedicos;
+        private DataGridView dtgvMedicos;
     }
 }

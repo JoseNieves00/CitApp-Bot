@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ENTITY;
 using DAL;
+using System.Data;
 
 namespace BLL
 {
@@ -25,6 +26,11 @@ namespace BLL
         public static Paciente ObtenerPaciente(string cedula)
         {
             return pacienteDAL.BuscarPorCedula(cedula);
+        }
+
+        public static DataTable ListarPacientes()
+        {
+            return pacienteDAL.ListarPacientes();
         }
     }
 

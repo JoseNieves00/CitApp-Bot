@@ -72,6 +72,7 @@
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(209, 39);
             txtPassword.TabIndex = 3;
+            txtPassword.KeyDown += txtPassword_KeyDown;
             // 
             // txtUser
             // 

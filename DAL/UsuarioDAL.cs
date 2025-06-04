@@ -53,10 +53,37 @@ namespace DAL
             }
         }
 
-        public bool ValidarLogin(string usuario, string contrasena)
+        public DataTable ValidarLogin(string usuario, string clave)
         {
-            var admin = ObtenerUsuario(usuario, contrasena);
-            return admin != null && admin.NombreRol == "Administrador";
+            DataTable dt = new DataTable();
+
+            try
+            {
+                AbrirConexion();
+
+                string query = @"
+                SELECT u.idusuario, u.usuario, u.idrol, u.cedulapersona, r.nombre AS nombrerol
+                FROM usuario u
+                JOIN rol r ON u.idrol = r.idrol
+                WHERE u.usuario = @usuario AND u.clave = @clave";
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, Connection))
+                {
+                    cmd.Parameters.AddWithValue("@usuario", usuario);
+                    cmd.Parameters.AddWithValue("@clave", clave);
+
+                    using (NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
+            }
+            finally
+            {
+                CerrarConexion();
+            }
+
+            return dt;
         }
     }
 }

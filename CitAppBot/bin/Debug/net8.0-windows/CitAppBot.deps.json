@@ -456,7 +456,8 @@
       "BLL/1.0.0": {
         "dependencies": {
           "DAL": "1.0.0",
-          "ENTITY": "1.0.0"
+          "ENTITY": "1.0.0",
+          "Telegram.Bot": "18.0.0"
         },
         "runtime": {
           "BLL.dll": {

@@ -2,6 +2,7 @@
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace DAL
 {
@@ -32,41 +33,6 @@ namespace DAL
             {
                 CerrarConexion();
             }
-        }
-
-        public List<Paciente> ListarPacientes()
-        {
-            List<Paciente> lista = new List<Paciente>();
-
-            try
-            {
-                AbrirConexion();
-
-                string query = "SELECT IdPaciente, Nombre, Apellido, Cedula, Correo, Telefono FROM Paciente";
-
-                using (NpgsqlCommand cmd = new NpgsqlCommand(query, Connection))
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        lista.Add(new Paciente
-                        {
-                            Id_paciente = reader.GetInt32(0),
-                            Nombre = reader.GetString(1),
-                            Apellido = reader.GetString(2),
-                            Cedula = reader.GetString(3),
-                            Correo = reader.GetString(4),
-                            Telefono = reader.GetString(5)
-                        });
-                    }
-                }
-            }
-            finally
-            {
-                CerrarConexion();
-            }
-
-            return lista;
         }
 
         public Paciente BuscarPorCedula(string cedula)
@@ -105,5 +71,38 @@ namespace DAL
 
             return null;
         }
+
+        public DataTable ListarPacientes()
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                AbrirConexion();
+
+                string query = @"
+                    SELECT 
+                        idPaciente, 
+                        cedula, 
+                        nombre, 
+                        telefono, 
+                        correo 
+                    FROM 
+                        paciente";
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, Connection))
+                using (NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd))
+                {
+                    da.Fill(dt);
+                }
+            }
+            finally
+            {
+                CerrarConexion();
+            }
+
+            return dt;
+        }
+
     }
 }

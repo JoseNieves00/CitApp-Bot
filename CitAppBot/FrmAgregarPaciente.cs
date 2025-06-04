@@ -21,7 +21,7 @@ namespace CitAppBot
 
         private void IBlimpiar_Click(object sender, EventArgs e)
         {
-
+            limpiarCampos();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -31,10 +31,17 @@ namespace CitAppBot
 
         private void IBsalir_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
         }
 
-
+        private void limpiarCampos()
+        {
+           txtNombre.Clear();
+           txtApellido.Clear();
+           txtCedula.Clear();
+           txtCorreo.Clear();
+           txtTelefono.Clear();
+        }
         private bool validarCampos()
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text) ||

@@ -101,6 +101,7 @@
             IBlimpiar.TabIndex = 11;
             IBlimpiar.Text = "Limpiar";
             IBlimpiar.UseVisualStyleBackColor = false;
+            IBlimpiar.Click += IBlimpiar_Click;
             // 
             // btnAgregar
             // 

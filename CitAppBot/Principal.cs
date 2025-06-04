@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ENTITY;
 using FontAwesome.Sharp;
 
 namespace CitAppBot
@@ -93,7 +94,9 @@ namespace CitAppBot
         }
 
         // Eventos
-        private void FrmPrincipal_Load(object sender, EventArgs e) { }
+        private void FrmPrincipal_Load(object sender, EventArgs e) {
+            MessageBox.Show($"Bienvenido {UsuarioSession.NombreUsuario}");
+        }
 
         private void panel1_Paint(object sender, PaintEventArgs e) { }
 
