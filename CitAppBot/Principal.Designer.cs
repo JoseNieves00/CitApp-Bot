@@ -40,6 +40,7 @@ namespace CitAppBot
             PanelTtl = new Panel();
             TituloHijo = new Label();
             iconPictureChild = new FontAwesome.Sharp.IconPictureBox();
+            panelDesktop = new Panel();
             panelMenu.SuspendLayout();
             panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -242,11 +243,21 @@ namespace CitAppBot
             iconPictureChild.TabStop = false;
             iconPictureChild.Click += iconPictureChild_Click;
             // 
+            // panelDesktop
+            // 
+            panelDesktop.BackColor = SystemColors.GradientActiveCaption;
+            panelDesktop.Dock = DockStyle.Fill;
+            panelDesktop.Location = new Point(220, 80);
+            panelDesktop.Name = "panelDesktop";
+            panelDesktop.Size = new Size(833, 440);
+            panelDesktop.TabIndex = 2;
+            // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1053, 520);
+            Controls.Add(panelDesktop);
             Controls.Add(PanelTtl);
             Controls.Add(panelMenu);
             Name = "FrmPrincipal";
@@ -277,6 +288,7 @@ namespace CitAppBot
         private Panel PanelTtl;
         private FontAwesome.Sharp.IconPictureBox iconPictureChild;
         private Label TituloHijo;
+        private Panel panelDesktop;
     }
 }
 

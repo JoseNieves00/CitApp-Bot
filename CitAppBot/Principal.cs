@@ -19,7 +19,8 @@ namespace CitAppBot
         // Campos
         private IconButton currentBtn;
         private Panel leftBorderBtn;
-        
+        private Form currentChildForm;
+
 
         // Colores
         private Color primaryColor = Color.FromArgb(0, 120, 100);
@@ -65,6 +66,24 @@ namespace CitAppBot
             }
         }
 
+
+        private void OpenChildForm(Form childForm)
+        {
+            if (currentChildForm != null)
+            {
+                currentChildForm.Close();
+            }
+            currentChildForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            panelDesktop.Controls.Add(childForm);
+            panelDesktop.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+            TituloHijo.Text = childForm.Text;
+        }
+
         private void ConfigurarBoton(IconButton boton, string texto, IconChar icono, EventHandler eventoClick)
         {
             boton.Dock = DockStyle.Top;
@@ -108,31 +127,37 @@ namespace CitAppBot
         private void IBmedicos_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, primaryColor);
+            OpenChildForm(new FrmMedicos());
         }
 
         private void iconButton4_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, primaryColor);
+            OpenChildForm(new FrmAgregarPaciente());
         }
 
         private void IBcitas_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, primaryColor);
+            OpenChildForm(new FrmCitas());
         }
 
         private void IBpacientes_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, secondColor);
+            OpenChildForm(new FrmPacientes());
         }
 
         private void IBgestion_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, thirdColor);
+
         }
 
         private void IBagregarmedico_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, fourthColor);
+            OpenChildForm(new FrmAgregarMedico());
         }
 
         private void IP_Click(object sender, EventArgs e)
