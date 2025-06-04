@@ -6,15 +6,9 @@ using System.Threading.Tasks;
 
 namespace ENTITY
 {
-    public enum Especialidad
+    public class Especialidad
     {
-        MedicinaGeneral,
-        Pediatria,
-        Cardiologia,
-        Dermatologia,
-        Ginecologia,
-        Ortopedia,
-        Psicologia,
-        Odontologia
+        public int Id { get; set; }
+        public string Nombre { get; set; }
     }
 }

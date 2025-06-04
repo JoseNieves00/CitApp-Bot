@@ -8,7 +8,7 @@ namespace ENTITY
 {
     public class Paciente
     {
-        public int IdPaciente { get; set; }
+        public int Id_paciente { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Cedula { get; set; } 
@@ -19,7 +19,7 @@ namespace ENTITY
 
         public Paciente(int idPaciente, string nombre, string apellido, string cedula, string correo, string telefono)
         {
-            IdPaciente = idPaciente;
+            Id_paciente = idPaciente;
             Nombre = nombre;
             Apellido = apellido;
             Cedula = cedula;

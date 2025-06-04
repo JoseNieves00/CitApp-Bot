@@ -11,3 +11,10 @@ BLL/obj/Debug/net8.0/BLL.sourcelink.json
 CitAppBot/obj/Debug/net8.0-windows/CitAppBot.sourcelink.json
 DAL/obj/Debug/net8.0/DAL.sourcelink.json
 ENTITY/obj/Debug/net8.0/ENTITY.sourcelink.json
+ENTITY/obj/project.nuget.cache
+ENTITY/obj/Debug/net8.0/ENTITY.AssemblyInfo.cs
+ENTITY/obj/Debug/net8.0/ENTITY.AssemblyInfoInputs.cache
+ENTITY/obj/Debug/net8.0/ENTITY.assets.cache
+ENTITY/obj/Debug/net8.0/ENTITY.GeneratedMSBuildEditorConfig.editorconfig
+ENTITY/obj/ENTITY.csproj.nuget.dgspec.json
+ENTITY/obj/ENTITY.csproj.nuget.g.props

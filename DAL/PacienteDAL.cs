@@ -1,5 +1,5 @@
 ﻿using ENTITY;
-using Microsoft.Data.SqlClient;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 
@@ -17,7 +17,7 @@ namespace DAL
                     INSERT INTO Paciente (Nombre, Apellido, Cedula, Correo, Telefono)
                     VALUES (@Nombre, @Apellido, @Cedula, @Correo, @Telefono);";
 
-                using (SqlCommand cmd = new SqlCommand(query, Connection))
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, Connection))
                 {
                     cmd.Parameters.AddWithValue("@Nombre", paciente.Nombre);
                     cmd.Parameters.AddWithValue("@Apellido", paciente.Apellido);
@@ -44,14 +44,14 @@ namespace DAL
 
                 string query = "SELECT IdPaciente, Nombre, Apellido, Cedula, Correo, Telefono FROM Paciente";
 
-                using (SqlCommand cmd = new SqlCommand(query, Connection))
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, Connection))
+                using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         lista.Add(new Paciente
                         {
-                            IdPaciente = reader.GetInt32(0),
+                            Id_paciente = reader.GetInt32(0),
                             Nombre = reader.GetString(1),
                             Apellido = reader.GetString(2),
                             Cedula = reader.GetString(3),
@@ -77,17 +77,17 @@ namespace DAL
 
                 string query = "SELECT IdPaciente, Nombre, Apellido, Cedula, Correo, Telefono FROM Paciente WHERE Cedula = @Cedula";
 
-                using (SqlCommand cmd = new SqlCommand(query, Connection))
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, Connection))
                 {
                     cmd.Parameters.AddWithValue("@Cedula", cedula);
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             return new Paciente
                             {
-                                IdPaciente = reader.GetInt32(0),
+                                Id_paciente = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
                                 Apellido = reader.GetString(2),
                                 Cedula = reader.GetString(3),

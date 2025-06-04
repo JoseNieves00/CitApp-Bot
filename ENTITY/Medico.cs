@@ -20,7 +20,6 @@ namespace ENTITY
 
         public Medico(int IdMedico,string nombre, string cedula, Especialidad especialidad)
         {
-            IdMedico = IdMedico;
             Nombre = nombre;
             Cedula = cedula;
             Especialidad = especialidad;

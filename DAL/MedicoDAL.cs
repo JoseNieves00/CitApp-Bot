@@ -1,5 +1,5 @@
 ﻿using ENTITY;
-using Microsoft.Data.SqlClient;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 
@@ -13,18 +13,17 @@ namespace DAL
             {
                 AbrirConexion();
 
-                string query = @"
-                    INSERT INTO Medico (Cedula, Nombre, IdEspecialidad) 
-                    VALUES (@Cedula, @Nombre, @IdEspecialidad);";
+                string query = @"INSERT INTO medico (cedula, nombre,idEspecialidad) VALUES (@Cedula, @Nombre, @IdEspecialidad);";
 
-                using (SqlCommand cmd = new SqlCommand(query, Connection))
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, Connection))
                 {
                     cmd.Parameters.AddWithValue("@Cedula", medico.Cedula);
                     cmd.Parameters.AddWithValue("@Nombre", medico.Nombre);
-                    cmd.Parameters.AddWithValue("@IdEspecialidad", (int)medico.Especialidad);
-
+                    cmd.Parameters.AddWithValue("@idEspecialidad", medico.Especialidad.Id);
+                    
                     cmd.ExecuteNonQuery();
                 }
+
             }
             finally
             {
@@ -42,8 +41,8 @@ namespace DAL
 
                 string query = "SELECT Cedula, Nombre, IdEspecialidad FROM Medico";
 
-                using (SqlCommand cmd = new SqlCommand(query, Connection))
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, Connection))
+                using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -51,7 +50,10 @@ namespace DAL
                         {
                             Cedula = reader.GetString(0),
                             Nombre = reader.GetString(1),
-                            Especialidad = (Especialidad)reader.GetInt32(2)
+                            Especialidad = new Especialidad
+                            {
+                                Id = reader.GetInt32(2)
+                            }
                         });
                     }
                 }
@@ -72,11 +74,11 @@ namespace DAL
 
                 string query = "SELECT Cedula, Nombre, IdEspecialidad FROM Medico WHERE Cedula = @Cedula";
 
-                using (SqlCommand cmd = new SqlCommand(query, Connection))
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, Connection))
                 {
                     cmd.Parameters.AddWithValue("@Cedula", cedula);
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -84,7 +86,10 @@ namespace DAL
                             {
                                 Cedula = reader.GetString(0),
                                 Nombre = reader.GetString(1),
-                                Especialidad = (Especialidad)reader.GetInt32(2)
+                                Especialidad = new Especialidad
+                                {
+                                    Id = reader.GetInt32(2)
+                                }
                             };
                         }
                     }
@@ -108,11 +113,11 @@ namespace DAL
 
                 string query = "SELECT Cedula, Nombre, IdEspecialidad FROM Medico WHERE IdEspecialidad = @IdEspecialidad";
 
-                using (SqlCommand cmd = new SqlCommand(query, Connection))
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, Connection))
                 {
-                    cmd.Parameters.AddWithValue("@IdEspecialidad", (int)especialidad);
+                    cmd.Parameters.AddWithValue("@IdEspecialidad", especialidad.Id);
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -120,7 +125,10 @@ namespace DAL
                             {
                                 Cedula = reader.GetString(0),
                                 Nombre = reader.GetString(1),
-                                Especialidad = (Especialidad)reader.GetInt32(2)
+                                Especialidad = new Especialidad
+                                {
+                                    Id = reader.GetInt32(2)
+                                }
                             });
                         }
                     }

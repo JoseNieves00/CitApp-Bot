@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
-using Microsoft.Data.SqlClient;
+using Npgsql;
 
 namespace DAL
 {
     public class Database
     {
-        protected string ConnectionString = "Server=.\\SQLEXPRESS;Database=CitApp;User Id=admin;Password=admin123";
-        protected SqlConnection Connection;
+        protected string ConnectionString = "Host=ep-super-rain-a8q4m9ex-pooler.eastus2.azure.neon.tech;Database=CitApp-DB;Username=CitApp-DB_owner;Password=npg_hgGpPKToC5S7";
+        protected NpgsqlConnection  Connection;
 
         public Database()
         {
-            Connection = new SqlConnection(ConnectionString);
+            Connection = new NpgsqlConnection (ConnectionString);
         }
 
         public ConnectionState AbrirConexion()
@@ -26,22 +25,25 @@ namespace DAL
                 Connection.Open();
                 return Connection.State;
             }
-            catch (SqlException ex)
+            catch (NpgsqlException ex)
             {
                 Console.WriteLine($"Error de conexión: {ex.Message}");
-                Console.WriteLine($"Número de error: {ex.Number}");
+                Console.WriteLine($"Código SQLSTATE: {ex.SqlState}");
 
-                if (ex.Number == 18456)
+
+                if (ex.SqlState == "28P01")
                 {
                     Console.WriteLine("Error de autenticación. Verifica usuario y contraseña.");
                 }
-                else if (ex.Number == 4060)
+                else if (ex.SqlState == "3D000")
                 {
                     Console.WriteLine("No se pudo acceder a la base de datos especificada.");
                 }
+
                 throw;
             }
         }
+
 
         public void CerrarConexion()
         {

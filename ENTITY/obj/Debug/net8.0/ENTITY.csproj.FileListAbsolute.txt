@@ -21,3 +21,15 @@ C:\Users\JUAN JOSE\OneDrive\Desktop\git3\CitApp-Bot\ENTITY\obj\Debug\net8.0\ENTI
 C:\Users\JUAN JOSE\OneDrive\Desktop\git3\CitApp-Bot\ENTITY\obj\Debug\net8.0\refint\ENTITY.dll
 C:\Users\JUAN JOSE\OneDrive\Desktop\git3\CitApp-Bot\ENTITY\obj\Debug\net8.0\ENTITY.pdb
 C:\Users\JUAN JOSE\OneDrive\Desktop\git3\CitApp-Bot\ENTITY\obj\Debug\net8.0\ref\ENTITY.dll
+C:\Users\Janer\Documents\COMENZAR_DEV\CitApp-Bot\ENTITY\bin\Debug\net8.0\ENTITY.deps.json
+C:\Users\Janer\Documents\COMENZAR_DEV\CitApp-Bot\ENTITY\bin\Debug\net8.0\ENTITY.dll
+C:\Users\Janer\Documents\COMENZAR_DEV\CitApp-Bot\ENTITY\bin\Debug\net8.0\ENTITY.pdb
+C:\Users\Janer\Documents\COMENZAR_DEV\CitApp-Bot\ENTITY\obj\Debug\net8.0\ENTITY.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Janer\Documents\COMENZAR_DEV\CitApp-Bot\ENTITY\obj\Debug\net8.0\ENTITY.AssemblyInfoInputs.cache
+C:\Users\Janer\Documents\COMENZAR_DEV\CitApp-Bot\ENTITY\obj\Debug\net8.0\ENTITY.AssemblyInfo.cs
+C:\Users\Janer\Documents\COMENZAR_DEV\CitApp-Bot\ENTITY\obj\Debug\net8.0\ENTITY.csproj.CoreCompileInputs.cache
+C:\Users\Janer\Documents\COMENZAR_DEV\CitApp-Bot\ENTITY\obj\Debug\net8.0\ENTITY.sourcelink.json
+C:\Users\Janer\Documents\COMENZAR_DEV\CitApp-Bot\ENTITY\obj\Debug\net8.0\ENTITY.dll
+C:\Users\Janer\Documents\COMENZAR_DEV\CitApp-Bot\ENTITY\obj\Debug\net8.0\refint\ENTITY.dll
+C:\Users\Janer\Documents\COMENZAR_DEV\CitApp-Bot\ENTITY\obj\Debug\net8.0\ENTITY.pdb
+C:\Users\Janer\Documents\COMENZAR_DEV\CitApp-Bot\ENTITY\obj\Debug\net8.0\ref\ENTITY.dll

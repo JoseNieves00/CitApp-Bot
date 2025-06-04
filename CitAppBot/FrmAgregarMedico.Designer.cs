@@ -30,18 +30,16 @@
         {
             panel1 = new Panel();
             panel2 = new Panel();
-            comboBoxEspecialidad = new ComboBox();
-            lblEspecialidad = new Label();
-            textBoxCedula = new TextBox();
-            lblCedula = new Label();
-            textBoxNombre = new TextBox();
-            lblNombre = new Label();
-            textBoxIDmedico = new TextBox();
-            lbl_IDmedico = new Label();
-            label1 = new Label();
-            IBregistrar = new FontAwesome.Sharp.IconButton();
-            IBlimpiar = new FontAwesome.Sharp.IconButton();
             IBsalir = new FontAwesome.Sharp.IconButton();
+            IBlimpiar = new FontAwesome.Sharp.IconButton();
+            btnAgregar = new FontAwesome.Sharp.IconButton();
+            cmbEspecialidad = new ComboBox();
+            lblEspecialidad = new Label();
+            txtCedula = new TextBox();
+            lblCedula = new Label();
+            txtNombre = new TextBox();
+            lblNombre = new Label();
+            label1 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -53,8 +51,9 @@
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(497, 603);
+            panel1.Size = new Size(746, 904);
             panel1.TabIndex = 0;
             // 
             // panel2
@@ -62,120 +61,18 @@
             panel2.BackColor = SystemColors.InactiveCaption;
             panel2.Controls.Add(IBsalir);
             panel2.Controls.Add(IBlimpiar);
-            panel2.Controls.Add(IBregistrar);
-            panel2.Controls.Add(comboBoxEspecialidad);
+            panel2.Controls.Add(btnAgregar);
+            panel2.Controls.Add(cmbEspecialidad);
             panel2.Controls.Add(lblEspecialidad);
-            panel2.Controls.Add(textBoxCedula);
+            panel2.Controls.Add(txtCedula);
             panel2.Controls.Add(lblCedula);
-            panel2.Controls.Add(textBoxNombre);
+            panel2.Controls.Add(txtNombre);
             panel2.Controls.Add(lblNombre);
-            panel2.Controls.Add(textBoxIDmedico);
-            panel2.Controls.Add(lbl_IDmedico);
-            panel2.Location = new Point(28, 97);
+            panel2.Location = new Point(42, 146);
+            panel2.Margin = new Padding(4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(428, 446);
+            panel2.Size = new Size(642, 669);
             panel2.TabIndex = 1;
-            // 
-            // comboBoxEspecialidad
-            // 
-            comboBoxEspecialidad.FormattingEnabled = true;
-            comboBoxEspecialidad.Location = new Point(181, 238);
-            comboBoxEspecialidad.Name = "comboBoxEspecialidad";
-            comboBoxEspecialidad.Size = new Size(198, 28);
-            comboBoxEspecialidad.TabIndex = 9;
-            // 
-            // lblEspecialidad
-            // 
-            lblEspecialidad.AutoSize = true;
-            lblEspecialidad.Location = new Point(41, 241);
-            lblEspecialidad.Name = "lblEspecialidad";
-            lblEspecialidad.Size = new Size(96, 20);
-            lblEspecialidad.TabIndex = 8;
-            lblEspecialidad.Text = "Especialidad:";
-            // 
-            // textBoxCedula
-            // 
-            textBoxCedula.Location = new Point(181, 184);
-            textBoxCedula.Name = "textBoxCedula";
-            textBoxCedula.Size = new Size(198, 27);
-            textBoxCedula.TabIndex = 7;
-            // 
-            // lblCedula
-            // 
-            lblCedula.AutoSize = true;
-            lblCedula.Location = new Point(41, 187);
-            lblCedula.Name = "lblCedula";
-            lblCedula.Size = new Size(58, 20);
-            lblCedula.TabIndex = 6;
-            lblCedula.Text = "Cedula:";
-            // 
-            // textBoxNombre
-            // 
-            textBoxNombre.Location = new Point(181, 124);
-            textBoxNombre.Name = "textBoxNombre";
-            textBoxNombre.Size = new Size(198, 27);
-            textBoxNombre.TabIndex = 5;
-            // 
-            // lblNombre
-            // 
-            lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(41, 127);
-            lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(67, 20);
-            lblNombre.TabIndex = 4;
-            lblNombre.Text = "Nombre:";
-            // 
-            // textBoxIDmedico
-            // 
-            textBoxIDmedico.Location = new Point(181, 61);
-            textBoxIDmedico.Name = "textBoxIDmedico";
-            textBoxIDmedico.Size = new Size(198, 27);
-            textBoxIDmedico.TabIndex = 3;
-            // 
-            // lbl_IDmedico
-            // 
-            lbl_IDmedico.AutoSize = true;
-            lbl_IDmedico.Location = new Point(41, 64);
-            lbl_IDmedico.Name = "lbl_IDmedico";
-            lbl_IDmedico.Size = new Size(81, 20);
-            lbl_IDmedico.TabIndex = 2;
-            lbl_IDmedico.Text = "ID Médico:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(190, 61);
-            label1.Name = "label1";
-            label1.Size = new Size(117, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Agregar Médico";
-            label1.Click += label1_Click;
-            // 
-            // IBregistrar
-            // 
-            IBregistrar.BackColor = Color.FromArgb(128, 255, 128);
-            IBregistrar.IconChar = FontAwesome.Sharp.IconChar.None;
-            IBregistrar.IconColor = Color.Black;
-            IBregistrar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            IBregistrar.Location = new Point(28, 299);
-            IBregistrar.Name = "IBregistrar";
-            IBregistrar.Size = new Size(140, 47);
-            IBregistrar.TabIndex = 10;
-            IBregistrar.Text = "Registrar";
-            IBregistrar.UseVisualStyleBackColor = false;
-            // 
-            // IBlimpiar
-            // 
-            IBlimpiar.BackColor = Color.Silver;
-            IBlimpiar.IconChar = FontAwesome.Sharp.IconChar.None;
-            IBlimpiar.IconColor = Color.Black;
-            IBlimpiar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            IBlimpiar.Location = new Point(211, 299);
-            IBlimpiar.Name = "IBlimpiar";
-            IBlimpiar.Size = new Size(140, 47);
-            IBlimpiar.TabIndex = 11;
-            IBlimpiar.Text = "Limpiar";
-            IBlimpiar.UseVisualStyleBackColor = false;
             // 
             // IBsalir
             // 
@@ -183,19 +80,116 @@
             IBsalir.IconChar = FontAwesome.Sharp.IconChar.None;
             IBsalir.IconColor = Color.Black;
             IBsalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            IBsalir.Location = new Point(129, 370);
+            IBsalir.Location = new Point(194, 555);
+            IBsalir.Margin = new Padding(4);
             IBsalir.Name = "IBsalir";
-            IBsalir.Size = new Size(140, 47);
+            IBsalir.Size = new Size(210, 70);
             IBsalir.TabIndex = 12;
             IBsalir.Text = "Salir";
             IBsalir.UseVisualStyleBackColor = false;
             // 
+            // IBlimpiar
+            // 
+            IBlimpiar.BackColor = Color.Silver;
+            IBlimpiar.IconChar = FontAwesome.Sharp.IconChar.None;
+            IBlimpiar.IconColor = Color.Black;
+            IBlimpiar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            IBlimpiar.Location = new Point(316, 448);
+            IBlimpiar.Margin = new Padding(4);
+            IBlimpiar.Name = "IBlimpiar";
+            IBlimpiar.Size = new Size(210, 70);
+            IBlimpiar.TabIndex = 11;
+            IBlimpiar.Text = "Limpiar";
+            IBlimpiar.UseVisualStyleBackColor = false;
+            // 
+            // btnAgregar
+            // 
+            btnAgregar.BackColor = Color.FromArgb(128, 255, 128);
+            btnAgregar.IconChar = FontAwesome.Sharp.IconChar.None;
+            btnAgregar.IconColor = Color.Black;
+            btnAgregar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnAgregar.Location = new Point(42, 448);
+            btnAgregar.Margin = new Padding(4);
+            btnAgregar.Name = "btnAgregar";
+            btnAgregar.Size = new Size(210, 70);
+            btnAgregar.TabIndex = 10;
+            btnAgregar.Text = "Agregar";
+            btnAgregar.UseVisualStyleBackColor = false;
+            btnAgregar.Click += btnAgregar_Click;
+            // 
+            // cmbEspecialidad
+            // 
+            cmbEspecialidad.FormattingEnabled = true;
+            cmbEspecialidad.Location = new Point(272, 357);
+            cmbEspecialidad.Margin = new Padding(4);
+            cmbEspecialidad.Name = "cmbEspecialidad";
+            cmbEspecialidad.Size = new Size(295, 38);
+            cmbEspecialidad.TabIndex = 9;
+            // 
+            // lblEspecialidad
+            // 
+            lblEspecialidad.AutoSize = true;
+            lblEspecialidad.Location = new Point(62, 362);
+            lblEspecialidad.Margin = new Padding(4, 0, 4, 0);
+            lblEspecialidad.Name = "lblEspecialidad";
+            lblEspecialidad.Size = new Size(132, 30);
+            lblEspecialidad.TabIndex = 8;
+            lblEspecialidad.Text = "Especialidad:";
+            // 
+            // txtCedula
+            // 
+            txtCedula.Location = new Point(272, 276);
+            txtCedula.Margin = new Padding(4);
+            txtCedula.Name = "txtCedula";
+            txtCedula.Size = new Size(295, 35);
+            txtCedula.TabIndex = 7;
+            // 
+            // lblCedula
+            // 
+            lblCedula.AutoSize = true;
+            lblCedula.Location = new Point(62, 280);
+            lblCedula.Margin = new Padding(4, 0, 4, 0);
+            lblCedula.Name = "lblCedula";
+            lblCedula.Size = new Size(82, 30);
+            lblCedula.TabIndex = 6;
+            lblCedula.Text = "Cedula:";
+            // 
+            // txtNombre
+            // 
+            txtNombre.Location = new Point(272, 186);
+            txtNombre.Margin = new Padding(4);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(295, 35);
+            txtNombre.TabIndex = 5;
+            // 
+            // lblNombre
+            // 
+            lblNombre.AutoSize = true;
+            lblNombre.Location = new Point(62, 190);
+            lblNombre.Margin = new Padding(4, 0, 4, 0);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(94, 30);
+            lblNombre.TabIndex = 4;
+            lblNombre.Text = "Nombre:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(285, 92);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(162, 30);
+            label1.TabIndex = 0;
+            label1.Text = "Agregar Médico";
+            label1.Click += label1_Click;
+            // 
             // FrmAgregarMedico
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(497, 603);
+            ClientSize = new Size(746, 904);
             Controls.Add(panel1);
+            Margin = new Padding(4);
             Name = "FrmAgregarMedico";
             Text = "FrmAgregarMedico";
             Load += FrmAgregarMedico_Load;
@@ -212,15 +206,13 @@
         private Label label1;
         private Panel panel2;
         private Label lblEspecialidad;
-        private TextBox textBoxCedula;
+        private TextBox txtCedula;
         private Label lblCedula;
-        private TextBox textBoxNombre;
+        private TextBox txtNombre;
         private Label lblNombre;
-        private TextBox textBoxIDmedico;
-        private Label lbl_IDmedico;
-        private ComboBox comboBoxEspecialidad;
+        private ComboBox cmbEspecialidad;
         private FontAwesome.Sharp.IconButton IBlimpiar;
-        private FontAwesome.Sharp.IconButton IBregistrar;
+        private FontAwesome.Sharp.IconButton btnAgregar;
         private FontAwesome.Sharp.IconButton IBsalir;
     }
 }

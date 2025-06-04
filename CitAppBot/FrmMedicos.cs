@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace CitAppBot
 {
-    public partial class FrmMedicos: Form
+    public partial class FrmMedicos : Form
     {
         public FrmMedicos()
         {
             InitializeComponent();
+        }
+
+        private void vScrollBarMedicos_Scroll(object sender, ScrollEventArgs e)
+        {
+
         }
     }
 }
