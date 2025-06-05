@@ -9,10 +9,16 @@ namespace BLL
     {
         private static EspecialidadDAL especialidadDAL = new EspecialidadDAL();
 
-        // Método para obtener todas las especialidades
+        
         public static List<Especialidad> ObtenerTodas()
         {
             return especialidadDAL.ObtenerEspecialidades();
         }
+
+        public static Especialidad ObtenerEspecialidadPorId(long id)
+        {
+            return especialidadDAL.ObtenerEspecialidadPorId(id);
+        }
+
     }
 }

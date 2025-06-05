@@ -37,5 +37,40 @@ namespace DAL
 
             return lista;
         }
+
+        public Especialidad ObtenerEspecialidadPorId(long id)
+        {
+            Especialidad especialidad = null;
+
+            try
+            {
+                AbrirConexion();
+                string query = "SELECT IdEspecialidad, Nombre FROM Especialidad WHERE IdEspecialidad = @id";
+
+                using (var cmd = new NpgsqlCommand(query, Connection))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            especialidad = new Especialidad
+                            {
+                                Id = reader.GetInt32(0),
+                                Nombre = reader.GetString(1)
+                            };
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                CerrarConexion();
+            }
+
+            return especialidad;
+        }
+
     }
 }

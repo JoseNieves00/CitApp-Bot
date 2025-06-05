@@ -11,31 +11,33 @@ namespace BLL
     {
         private static CitaDAL citaDAL = new CitaDAL();
 
-        //public static string RegistrarCita(Cita cita)
-        //{
-            
-        //    var medico = cita.Medico;
-        //    var paciente = cita.Paciente;
+        public static string AgendarCita(Cita cita)
+        {
+            var medico = cita.Medico;
+            var paciente = cita.Paciente;
 
-        //    if (medico == null || paciente == null)
-        //        return "Médico o paciente no registrado.";
+            if (medico == null)
+                return "Error: Médico no especificado.";
 
-        //    bool ocupado = citaDAL.Listar().Any(c =>
-        //        c.Medico.IdMedico == medico.IdMedico &&
-        //        c.Fecha.Date == cita.Fecha.Date &&
-        //        c.Hora == cita.Hora &&
-        //        c.Estado != "Cancelada"
-        //    );
+            if (paciente == null)
+                return "Error: Paciente no especificado.";
 
-        //    if (ocupado)
-        //        return "Horario ocupado para ese médico.";
+            bool ocupado = citaDAL.ListCitas().Any(c =>
+                c.Medico.IdMedico == medico.IdMedico &&
+                c.Fecha.Date == cita.Fecha.Date &&
+                c.Hora == cita.Hora &&
+                c.Estado != "Cancelada"
+            );
 
-        //    int id = citaDAL.Registrar(cita);
-        //    if (id == -1)
-        //        return "Error al registrar la cita.";
+            if (ocupado)
+                return $"Error: El médico {medico.Nombre} ya tiene una cita agendada para {cita.Fecha:dd/MM/yyyy} a las {cita.Hora:hh\\:mm}.";
 
-        //    return $"Cita agendada exitosamente con ID {id}.";
-        //}
+            int id = citaDAL.Registrar(cita);
+            if (id == -1)
+                return "Error: No se pudo registrar la cita, inténtalo más tarde.";
+
+            return "exito";  // Mensaje para éxito
+        }
 
         //public static string ReagendarCita(int id, DateTime nuevaFecha, TimeSpan nuevaHora)
         //{
@@ -53,7 +55,7 @@ namespace BLL
         //    if (ocupado)
         //        return "El médico ya tiene una cita en ese horario.";
 
-            
+
         //    cita.Fecha = nuevaFecha;
         //    cita.Hora = nuevaHora;
         //    citaDAL.ActualizarEstado(id, "Reagendada");
@@ -61,25 +63,25 @@ namespace BLL
         //    return "Cita reagendada correctamente.";
         //}
 
-        public static string EliminarCita(int id)
-        {
-            var cita = citaDAL.BuscarPorId(id);
-            if (cita == null)
-                return "Cita no encontrada.";
+        //public static string EliminarCita(int id)
+        //{
+        //    var cita = citaDAL.BuscarPorId(id);
+        //    if (cita == null)
+        //        return "Cita no encontrada.";
 
-            citaDAL.Eliminar(id);
-            return "Cita eliminada.";
-        }
+        //    citaDAL.Eliminar(id);
+        //    return "Cita eliminada.";
+        //}
 
-        public static string ConfirmarCita(int id)
-        {
-            var cita = citaDAL.BuscarPorId(id);
-            if (cita == null)
-                return "Cita no encontrada.";
+        //public static string ConfirmarCita(int id)
+        //{
+        //    var cita = citaDAL.BuscarPorId(id);
+        //    if (cita == null)
+        //        return "Cita no encontrada.";
 
-            citaDAL.ActualizarEstado(id, "Confirmada");
-            return "Cita confirmada.";
-        }
+        //    citaDAL.ActualizarEstado(id, "Confirmada");
+        //    return "Cita confirmada.";
+        //}
 
         //public static List<Cita> ObtenerPorEstado(string estado)
         //{
@@ -89,6 +91,19 @@ namespace BLL
         public static DataTable ListarTodas()
         {
             return citaDAL.Listar();
+        }
+
+        public List<Cita> ObtenerCitasPorCedula(string cedula)
+        {
+            if (string.IsNullOrWhiteSpace(cedula))
+                return new List<Cita>();
+
+            return citaDAL.ListarPorCedula(cedula);
+        }
+
+        public static List<TimeSpan> ObtenerHorariosDisponibles(Medico medico, DateTime fecha)
+        {
+            return citaDAL.ObtenerHorariosDisponibles(medico.IdMedico,fecha);
         }
     }
 }

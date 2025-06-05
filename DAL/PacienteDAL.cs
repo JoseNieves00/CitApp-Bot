@@ -53,7 +53,7 @@ namespace DAL
                         {
                             return new Paciente
                             {
-                                Id_paciente = reader.GetInt32(0),
+                                Idpaciente = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
                                 Apellido = reader.GetString(2),
                                 Cedula = reader.GetString(3),

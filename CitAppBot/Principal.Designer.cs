@@ -60,8 +60,9 @@ namespace CitAppBot
             panelMenu.Controls.Add(panelLogo);
             panelMenu.Dock = DockStyle.Left;
             panelMenu.Location = new Point(0, 0);
+            panelMenu.Margin = new Padding(4, 4, 4, 4);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(220, 520);
+            panelMenu.Size = new Size(330, 780);
             panelMenu.TabIndex = 0;
             // 
             // IBagregarmedico
@@ -73,10 +74,11 @@ namespace CitAppBot
             IBagregarmedico.IconFont = FontAwesome.Sharp.IconFont.Auto;
             IBagregarmedico.IconSize = 40;
             IBagregarmedico.ImageAlign = ContentAlignment.MiddleLeft;
-            IBagregarmedico.Location = new Point(0, 425);
+            IBagregarmedico.Location = new Point(0, 638);
+            IBagregarmedico.Margin = new Padding(4, 4, 4, 4);
             IBagregarmedico.Name = "IBagregarmedico";
-            IBagregarmedico.Padding = new Padding(10, 0, 20, 0);
-            IBagregarmedico.Size = new Size(220, 60);
+            IBagregarmedico.Padding = new Padding(15, 0, 30, 0);
+            IBagregarmedico.Size = new Size(330, 90);
             IBagregarmedico.TabIndex = 6;
             IBagregarmedico.Text = "Agregar médico";
             IBagregarmedico.TextAlign = ContentAlignment.MiddleLeft;
@@ -93,10 +95,11 @@ namespace CitAppBot
             IBagregarpaciente.IconFont = FontAwesome.Sharp.IconFont.Auto;
             IBagregarpaciente.IconSize = 40;
             IBagregarpaciente.ImageAlign = ContentAlignment.MiddleLeft;
-            IBagregarpaciente.Location = new Point(0, 365);
+            IBagregarpaciente.Location = new Point(0, 548);
+            IBagregarpaciente.Margin = new Padding(4, 4, 4, 4);
             IBagregarpaciente.Name = "IBagregarpaciente";
-            IBagregarpaciente.Padding = new Padding(10, 0, 20, 0);
-            IBagregarpaciente.Size = new Size(220, 60);
+            IBagregarpaciente.Padding = new Padding(15, 0, 30, 0);
+            IBagregarpaciente.Size = new Size(330, 90);
             IBagregarpaciente.TabIndex = 5;
             IBagregarpaciente.Text = "Agregar paciente";
             IBagregarpaciente.TextAlign = ContentAlignment.MiddleLeft;
@@ -113,10 +116,11 @@ namespace CitAppBot
             IBgestion.IconFont = FontAwesome.Sharp.IconFont.Auto;
             IBgestion.IconSize = 40;
             IBgestion.ImageAlign = ContentAlignment.MiddleLeft;
-            IBgestion.Location = new Point(0, 305);
+            IBgestion.Location = new Point(0, 458);
+            IBgestion.Margin = new Padding(4, 4, 4, 4);
             IBgestion.Name = "IBgestion";
-            IBgestion.Padding = new Padding(10, 0, 20, 0);
-            IBgestion.Size = new Size(220, 60);
+            IBgestion.Padding = new Padding(15, 0, 30, 0);
+            IBgestion.Size = new Size(330, 90);
             IBgestion.TabIndex = 4;
             IBgestion.Text = "Gestión";
             IBgestion.TextAlign = ContentAlignment.MiddleLeft;
@@ -133,10 +137,11 @@ namespace CitAppBot
             IBmedicos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             IBmedicos.IconSize = 40;
             IBmedicos.ImageAlign = ContentAlignment.MiddleLeft;
-            IBmedicos.Location = new Point(0, 245);
+            IBmedicos.Location = new Point(0, 368);
+            IBmedicos.Margin = new Padding(4, 4, 4, 4);
             IBmedicos.Name = "IBmedicos";
-            IBmedicos.Padding = new Padding(10, 0, 20, 0);
-            IBmedicos.Size = new Size(220, 60);
+            IBmedicos.Padding = new Padding(15, 0, 30, 0);
+            IBmedicos.Size = new Size(330, 90);
             IBmedicos.TabIndex = 3;
             IBmedicos.Text = "Médicos";
             IBmedicos.TextAlign = ContentAlignment.MiddleLeft;
@@ -153,10 +158,11 @@ namespace CitAppBot
             IBpacientes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             IBpacientes.IconSize = 40;
             IBpacientes.ImageAlign = ContentAlignment.MiddleLeft;
-            IBpacientes.Location = new Point(0, 185);
+            IBpacientes.Location = new Point(0, 278);
+            IBpacientes.Margin = new Padding(4, 4, 4, 4);
             IBpacientes.Name = "IBpacientes";
-            IBpacientes.Padding = new Padding(10, 0, 20, 0);
-            IBpacientes.Size = new Size(220, 60);
+            IBpacientes.Padding = new Padding(15, 0, 30, 0);
+            IBpacientes.Size = new Size(330, 90);
             IBpacientes.TabIndex = 2;
             IBpacientes.Text = "Pacientes";
             IBpacientes.TextAlign = ContentAlignment.MiddleLeft;
@@ -173,10 +179,11 @@ namespace CitAppBot
             IBcitas.IconFont = FontAwesome.Sharp.IconFont.Auto;
             IBcitas.IconSize = 40;
             IBcitas.ImageAlign = ContentAlignment.MiddleLeft;
-            IBcitas.Location = new Point(0, 125);
+            IBcitas.Location = new Point(0, 188);
+            IBcitas.Margin = new Padding(4, 4, 4, 4);
             IBcitas.Name = "IBcitas";
-            IBcitas.Padding = new Padding(10, 0, 20, 0);
-            IBcitas.Size = new Size(220, 60);
+            IBcitas.Padding = new Padding(15, 0, 30, 0);
+            IBcitas.Size = new Size(330, 90);
             IBcitas.TabIndex = 1;
             IBcitas.Text = "Citas";
             IBcitas.TextAlign = ContentAlignment.MiddleLeft;
@@ -190,18 +197,20 @@ namespace CitAppBot
             panelLogo.Controls.Add(pictureBox1);
             panelLogo.Dock = DockStyle.Top;
             panelLogo.Location = new Point(0, 0);
+            panelLogo.Margin = new Padding(4, 4, 4, 4);
             panelLogo.Name = "panelLogo";
-            panelLogo.Padding = new Padding(10, 0, 20, 0);
-            panelLogo.Size = new Size(220, 125);
+            panelLogo.Padding = new Padding(15, 0, 30, 0);
+            panelLogo.Size = new Size(330, 188);
             panelLogo.TabIndex = 0;
             panelLogo.Paint += panel1_Paint;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.Captura_de_pantalla_2025_05_22_114858_removebg_preview;
-            pictureBox1.Location = new Point(15, 18);
+            pictureBox1.Location = new Point(22, 27);
+            pictureBox1.Margin = new Padding(4, 4, 4, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(169, 101);
+            pictureBox1.Size = new Size(254, 152);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -213,17 +222,19 @@ namespace CitAppBot
             PanelTtl.Controls.Add(TituloHijo);
             PanelTtl.Controls.Add(iconPictureChild);
             PanelTtl.Dock = DockStyle.Top;
-            PanelTtl.Location = new Point(220, 0);
+            PanelTtl.Location = new Point(330, 0);
+            PanelTtl.Margin = new Padding(4, 4, 4, 4);
             PanelTtl.Name = "PanelTtl";
-            PanelTtl.Size = new Size(833, 80);
+            PanelTtl.Size = new Size(1250, 120);
             PanelTtl.TabIndex = 1;
             // 
             // TituloHijo
             // 
             TituloHijo.AutoSize = true;
-            TituloHijo.Location = new Point(67, 27);
+            TituloHijo.Location = new Point(100, 40);
+            TituloHijo.Margin = new Padding(4, 0, 4, 0);
             TituloHijo.Name = "TituloHijo";
-            TituloHijo.Size = new Size(50, 20);
+            TituloHijo.Size = new Size(68, 30);
             TituloHijo.TabIndex = 1;
             TituloHijo.Text = "label1";
             TituloHijo.Click += TituloHijo_Click;
@@ -235,10 +246,11 @@ namespace CitAppBot
             iconPictureChild.IconChar = FontAwesome.Sharp.IconChar.House;
             iconPictureChild.IconColor = SystemColors.ControlText;
             iconPictureChild.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconPictureChild.IconSize = 40;
-            iconPictureChild.Location = new Point(21, 18);
+            iconPictureChild.IconSize = 60;
+            iconPictureChild.Location = new Point(32, 27);
+            iconPictureChild.Margin = new Padding(4, 4, 4, 4);
             iconPictureChild.Name = "iconPictureChild";
-            iconPictureChild.Size = new Size(40, 40);
+            iconPictureChild.Size = new Size(60, 60);
             iconPictureChild.TabIndex = 0;
             iconPictureChild.TabStop = false;
             iconPictureChild.Click += iconPictureChild_Click;
@@ -247,20 +259,23 @@ namespace CitAppBot
             // 
             panelDesktop.BackColor = SystemColors.GradientActiveCaption;
             panelDesktop.Dock = DockStyle.Fill;
-            panelDesktop.Location = new Point(220, 80);
+            panelDesktop.Location = new Point(330, 120);
+            panelDesktop.Margin = new Padding(4, 4, 4, 4);
             panelDesktop.Name = "panelDesktop";
-            panelDesktop.Size = new Size(833, 440);
+            panelDesktop.Size = new Size(1250, 660);
             panelDesktop.TabIndex = 2;
             // 
             // FrmPrincipal
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1053, 520);
+            ClientSize = new Size(1580, 780);
             Controls.Add(panelDesktop);
             Controls.Add(PanelTtl);
             Controls.Add(panelMenu);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "FrmPrincipal";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Principal";
             Load += FrmPrincipal_Load;
             panelMenu.ResumeLayout(false);

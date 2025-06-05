@@ -12,20 +12,18 @@ namespace ENTITY
         public Paciente Paciente { get; set; }
         public Medico Medico { get; set; }
         public DateTime Fecha { get; set; }
-        public TimeSpan Hora { get; set; } // "06:00", "07:27", etc.
-        public decimal Valor { get; set; }
-        public string Estado { get; set; } // "Agendada", "Realizada", "Cancelada"
+        public TimeSpan Hora { get; set; }
+        public string Estado { get; set; }
 
         public Cita() { }
 
-        public Cita(int idCita, Paciente Paciente, Medico medico, DateTime fecha, TimeSpan hora, decimal valor, string estado)
+        public Cita(int idCita, Paciente paciente, Medico medico, DateTime fecha, TimeSpan hora, string estado)
         {
             IdCita = idCita;
-            Paciente = Paciente;
+            Paciente = paciente;
             Medico = medico;
             Fecha = fecha;
             Hora = hora;
-            Valor = valor;
             Estado = estado;
         }
     }

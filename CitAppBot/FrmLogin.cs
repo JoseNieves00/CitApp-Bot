@@ -1,4 +1,4 @@
-﻿using Telegram; //
+﻿using Telegram; // 
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
@@ -10,6 +10,7 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using System.Data;
 using ENTITY;
+using System.Globalization;
 
 namespace CitAppBot
 {
@@ -26,16 +27,12 @@ namespace CitAppBot
         private void Form1_Load(object sender, EventArgs e)
         {
             BotClient = new TelegramBotClient("8059200833:AAEhtJgEEeJ9ol5hPHpc8VSiJsuqXGZTTcU");
-            StartReceive(); // Chatbot se inicia al cargar el form
+            _ = StartReceive(); // Chatbot se inicia al cargar el form
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-        }
+        private void label1_Click(object sender, EventArgs e) { }
 
         private void limpiarCampos()
         {
@@ -58,14 +55,14 @@ namespace CitAppBot
 
             if (dt.Rows.Count > 0)
             {
-                // Guardar sesi�n
+                // Guardar sesión
                 UsuarioSession.IdUsuario = Convert.ToInt32(dt.Rows[0]["idusuario"]);
                 UsuarioSession.NombreUsuario = dt.Rows[0]["usuario"].ToString();
                 UsuarioSession.IdRol = Convert.ToInt32(dt.Rows[0]["idrol"]);
                 UsuarioSession.NombreRol = dt.Rows[0]["nombrerol"].ToString();
                 UsuarioSession.CedulaPersona = dt.Rows[0]["cedulapersona"].ToString();
 
-                // Abrir men� principal
+                // Abrir menú principal
                 FrmPrincipal menu = new FrmPrincipal();
                 menu.Show();
                 this.Hide();
@@ -77,7 +74,6 @@ namespace CitAppBot
                 txtUser.Focus();
             }
         }
-
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -95,155 +91,370 @@ namespace CitAppBot
         // ========== LÓGICA DEL CHATBOT DE TELEGRAM ==========
 
         private static readonly Dictionary<long, string> EstadoChat = new();
-        private static readonly Dictionary<long, string> TemporalDatos = new(); // puedes usarlo para guardar temporalmente valores
+        private static readonly Dictionary<long, Cita> AgendaTemporal = new();
+        private static readonly Dictionary<long, Paciente> PacientesPorChat = new();
+        Cita cita = new Cita();
+        Paciente paciente = new Paciente();
+        Medico medico = new Medico(); 
 
         public async Task StartReceive()
         {
-            var token = new CancellationTokenSource();
-            var cancelToken = token.Token;
-            var ReOpt = new ReceiverOptions { AllowedUpdates = { } };
-            await BotClient.ReceiveAsync(OnMessage, ErrorMessage, ReOpt, cancelToken);
+            var cts = new CancellationTokenSource();
+            var options = new ReceiverOptions { AllowedUpdates = { } };
+            BotClient.StartReceiving(HandleUpdateAsync, HandleErrorAsync, options, cts.Token);
+
+            var me = await BotClient.GetMeAsync();
         }
 
-        public async Task OnMessage(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+        public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
-            if (update.CallbackQuery != null)
+            var chatId = update.Type switch
             {
-                var chatId = update.CallbackQuery.Message.Chat.Id;
-                var opcion = update.CallbackQuery.Data;
+                UpdateType.Message => update.Message.Chat.Id,
+                UpdateType.CallbackQuery => update.CallbackQuery.Message.Chat.Id,
+                _ => 0
+            };
 
-                switch (opcion)
-                {
-                    case "📅 Agendar una cita":
-                        EstadoChat[chatId] = "Agendando_IDPaciente";
-                        await BotClient.SendTextMessageAsync(
-                            chatId: chatId,
-                            text: "🔢 Por favor, escribe tu *ID de paciente* para comenzar a agendar la cita.",
-                            parseMode: ParseMode.Markdown,
-                            cancellationToken: cancellationToken
-                        );
-                        break;
-
-                    case "✏️ Modificar una cita":
-                        EstadoChat[chatId] = "Modificando_IDCita";
-                        await BotClient.SendTextMessageAsync(
-                            chatId: chatId,
-                            text: "🔁 Para modificar una cita, escribe el *ID de la cita* que deseas actualizar.",
-                            parseMode: ParseMode.Markdown,
-                            cancellationToken: cancellationToken
-                        );
-                        break;
-
-                    case "❌ Cancelar una cita":
-                        EstadoChat[chatId] = "Cancelando_IDCita";
-                        await BotClient.SendTextMessageAsync(
-                            chatId: chatId,
-                            text: "🗑 Escribe el *ID de la cita* que deseas cancelar.",
-                            parseMode: ParseMode.Markdown,
-                            cancellationToken: cancellationToken
-                        );
-                        break;
-                }
-
-                return; // No sigas con el mensaje principal si es un callback
-            }
-
-            if (update.Message is Telegram.Bot.Types.Message message && message.Text != null)
+            if (update.Type == UpdateType.Message && update.Message.Type == MessageType.Text)
             {
-                var chatId = message.Chat.Id;
-                var texto = message.Text.Trim();
+                var userMessage = update.Message.Text.Trim().ToLower();
 
-                if (!EstadoChat.ContainsKey(chatId))
+                if (!PacientesPorChat.ContainsKey(chatId) && !EstadoChat.ContainsKey(chatId))
                 {
-                    // Mostrar menú inicial
-                    var inLineKeyboard = new InlineKeyboardMarkup(new[]
-                    {
-                new []
-                {
-                    InlineKeyboardButton.WithCallbackData("📅 Agendar una cita"),
-                    InlineKeyboardButton.WithCallbackData("✏️ Modificar una cita")
-                },
-                new []
-                {
-                    InlineKeyboardButton.WithCallbackData("❌ Cancelar una cita")
-                }
-            });
-
-                    await BotClient.SendTextMessageAsync(
-                        chatId: chatId,
-                        text: "Hola 👋\n\n¿Cómo puedo ayudarte hoy? Selecciona una opción:",
-                        replyMarkup: inLineKeyboard,
-                        cancellationToken: cancellationToken
-                    );
+                    await BotClient.SendTextMessageAsync(chatId, "👋 ¡Hola! Bienvenido a CitApp.\nPor favor, ingresa tu número de cédula para comenzar:");
+                    EstadoChat[chatId] = "esperando_cedula";
                     return;
                 }
 
-                var estadoActual = EstadoChat[chatId];
-
-                switch (estadoActual)
+                if (EstadoChat.TryGetValue(chatId, out string estado))
                 {
-                    case "Agendando_IDPaciente":
-                        TemporalDatos[chatId] = $"Paciente:{texto}";
-                        EstadoChat[chatId] = "Agendando_IDMedico";
-                        await BotClient.SendTextMessageAsync(chatId, "🩺 Escribe el *ID del médico* que deseas.", parseMode: ParseMode.Markdown);
-                        break;
+                    if (estado == "esperando_cedula")
+                    {
+                        string cedula = update.Message.Text.Trim();
+                        var paciente = PacienteBLL.ObtenerPaciente(cedula);
 
-                    case "Agendando_IDMedico":
-                        TemporalDatos[chatId] += $"|Medico:{texto}";
-                        EstadoChat[chatId] = "Agendando_Fecha";
-                        await BotClient.SendTextMessageAsync(chatId, "📆 Escribe la *fecha* (formato YYYY-MM-DD) para tu cita:", parseMode: ParseMode.Markdown);
-                        break;
+                        if (paciente == null)
+                        {
+                            await BotClient.SendTextMessageAsync(chatId, "❌ Cédula no encontrada. Intenta nuevamente.");
+                            return;
+                        }
 
-                    case "Agendando_Fecha":
-                        TemporalDatos[chatId] += $"|Fecha:{texto}";
-                        EstadoChat[chatId] = "Agendando_Hora";
-                        await BotClient.SendTextMessageAsync(chatId, "⏰ Escribe la *hora* (formato HH:mm) para tu cita:", parseMode: ParseMode.Markdown);
-                        break;
+                        PacientesPorChat[chatId] = paciente;
+                        AgendaTemporal[chatId] = new Cita { Paciente = paciente };
+                        EstadoChat[chatId] = "menu_principal";
 
-                    case "Agendando_Hora":
-                        TemporalDatos[chatId] += $"|Hora:{texto}";
-                        EstadoChat.Remove(chatId); // finalizar flujo
-                        await BotClient.SendTextMessageAsync(chatId, "✅ ¡Cita registrada! (En esta versión de prueba aún no se guarda en base de datos).");
-                        break;
+                        var inlineMenu = new InlineKeyboardMarkup(new[]
+                        {
+                    new[]
+                    {
+                        InlineKeyboardButton.WithCallbackData("📅 Consultar cita", "menu_consultar"),
+                        InlineKeyboardButton.WithCallbackData("➕ Agendar cita", "menu_agendar")
+                    }
+                });
 
-                    case "Modificando_IDCita":
-                        TemporalDatos[chatId] = $"IDCita:{texto}";
-                        EstadoChat[chatId] = "Modificando_Fecha";
-                        await BotClient.SendTextMessageAsync(chatId, "📆 Escribe la *nueva fecha* (YYYY-MM-DD):", parseMode: ParseMode.Markdown);
-                        break;
+                        await BotClient.SendTextMessageAsync(chatId, $"¡Hola, {paciente.Nombre}!\n¿Qué deseas hacer?", replyMarkup: inlineMenu);
+                        return;
+                    }
 
-                    case "Modificando_Fecha":
-                        TemporalDatos[chatId] += $"|Fecha:{texto}";
-                        EstadoChat[chatId] = "Modificando_Hora";
-                        await BotClient.SendTextMessageAsync(chatId, "⏰ Escribe la *nueva hora* (HH:mm):", parseMode: ParseMode.Markdown);
-                        break;
+                    if (estado == "preguntar_menu")
+                    {
+                        if (userMessage == "menu" || userMessage == "volver" || userMessage == "sí" || userMessage == "si")
+                        {
+                            EstadoChat.Remove(chatId);
+                            var inlineMenu = new InlineKeyboardMarkup(new[]
+                            {
+                        new[]
+                        {
+                            InlineKeyboardButton.WithCallbackData("📅 Consultar cita", "menu_consultar"),
+                            InlineKeyboardButton.WithCallbackData("➕ Agendar cita", "menu_agendar")
+                        }
+                    });
 
-                    case "Modificando_Hora":
-                        TemporalDatos[chatId] += $"|Hora:{texto}";
-                        EstadoChat.Remove(chatId); // finalizar flujo
-                        await BotClient.SendTextMessageAsync(chatId, "✅ ¡Cita modificada! (Pendiente lógica de actualización en la base de datos).");
-                        break;
+                            await BotClient.SendTextMessageAsync(chatId, "¿Qué deseas hacer ahora?", replyMarkup: inlineMenu);
+                        }
+                        else
+                        {
+                            await BotClient.SendTextMessageAsync(chatId, "Gracias por usar el sistema. ¡Hasta luego!");
+                            EstadoChat.Remove(chatId);
+                            PacientesPorChat.Remove(chatId);
+                        }
+                        return;
+                    }
 
-                    case "Cancelando_IDCita":
-                        EstadoChat.Remove(chatId);
-                        await BotClient.SendTextMessageAsync(chatId, $"✅ Cita con ID `{texto}` ha sido *cancelada* (simulado).", parseMode: ParseMode.Markdown);
-                        break;
+                    if (estado == "esperando_fecha")
+                    {
+                        if (DateTime.TryParseExact(update.Message.Text.Trim(), "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var fecha))
+                        {
+                            if (AgendaTemporal.TryGetValue(chatId, out var cita))
+                            {
+                                cita.Fecha = fecha;
+                                var horarios = CitaBLL.ObtenerHorariosDisponibles(cita.Medico, fecha);
+                                if (horarios.Any())
+                                {
+                                    var opciones = horarios.Select(h =>
+                                        new[] { InlineKeyboardButton.WithCallbackData(h.ToString(@"hh\:mm"), $"hora_{h}") }).ToList();
 
-                    default:
-                        await BotClient.SendTextMessageAsync(chatId, "⚠️ No entendí tu mensaje. Por favor, selecciona una opción del menú.");
-                        EstadoChat.Remove(chatId); // resetear para evitar bloqueos
-                        break;
+                                    EstadoChat[chatId] = "esperando_hora";
+                                    await BotClient.SendTextMessageAsync(chatId, "🕐 Elige una hora disponible:", replyMarkup: new InlineKeyboardMarkup(opciones));
+                                }
+                                else
+                                {
+                                    await BotClient.SendTextMessageAsync(chatId, "⚠️ No hay horarios disponibles para esa fecha. Ingresa otra (dd/MM/yyyy):");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            await BotClient.SendTextMessageAsync(chatId, "❌ Fecha inválida. Intenta con el formato dd/MM/yyyy.");
+                        }
+                        return;
+                    }
+
+                    if (estado == "esperando_confirmacion")
+                    {
+                        if (userMessage == "sí" || userMessage == "si" || userMessage == "confirmar")
+                        {
+                            if (AgendaTemporal.TryGetValue(chatId, out var citaFinal))
+                            {
+                                CitaBLL.AgendarCita(citaFinal);
+
+                                await BotClient.SendTextMessageAsync(chatId, $"✅ Tu cita fue agendada con éxito:\n📅 Fecha: {citaFinal.Fecha:dd/MM/yyyy}\n🕓 Hora: {citaFinal.Hora}\n👨‍⚕️ Médico: {citaFinal.Medico?.Nombre}");
+
+                                AgendaTemporal.Remove(chatId);
+                                EstadoChat[chatId] = "preguntar_menu";
+                                await EnviarPreguntaMenu(chatId);
+                            }
+                            else
+                            {
+                                await BotClient.SendTextMessageAsync(chatId, "❌ Ocurrió un error. No se pudo encontrar la cita a confirmar.");
+                            }
+                        }
+                        else
+                        {
+                            await BotClient.SendTextMessageAsync(chatId, "❌ Cita cancelada. Puedes volver a intentarlo cuando desees.");
+                            AgendaTemporal.Remove(chatId);
+                            EstadoChat[chatId] = "preguntar_menu";
+                            await EnviarPreguntaMenu(chatId);
+                        }
+                        return;
+                    }
                 }
             }
-        }
 
-        public async Task ErrorMessage(ITelegramBotClient botClient, Exception e, CancellationToken cancellationToken)
-        {
-            if (e is ApiRequestException requestException)
+
+            else if (update.Type == UpdateType.CallbackQuery)
             {
-                Console.WriteLine("Error de API: " + requestException.Message);
+                var callback = update.CallbackQuery;
+                var data = callback.Data;
+                var chatIdCb = callback.Message.Chat.Id;
+
+                if (data == "menu_consultar")
+                {
+                    if (PacientesPorChat.TryGetValue(chatIdCb, out var paciente))
+                    {
+                        CitaBLL citaBLL = new CitaBLL();
+                        List<Cita> citas = citaBLL.ObtenerCitasPorCedula(paciente.Cedula);
+
+                        if (citas != null && citas.Any())
+                        {
+                            var citasOrdenadas = citas.OrderBy(c => c.Fecha).ThenBy(c => c.Hora).ToList();
+                            string mensaje = "📋 Tus citas agendadas:\n";
+
+                            foreach (var cita in citasOrdenadas)
+                            {
+                                mensaje += $"\n🧑‍⚕️ Médico: {cita.Medico?.Nombre ?? "No especificado"}" +
+                                           $"\n📅 Fecha: {cita.Fecha:dd/MM/yyyy}" +
+                                           $"\n🕓 Hora: {cita.Hora}\n";
+                            }
+
+                            await BotClient.SendTextMessageAsync(chatIdCb, mensaje);
+                        }
+                        else
+                        {
+                            await BotClient.SendTextMessageAsync(chatIdCb, "ℹ️ No tienes citas agendadas.");
+                        }
+
+                        EstadoChat[chatIdCb] = "preguntar_menu";
+                        await EnviarPreguntaMenu(chatIdCb);
+                    }
+
+                    await BotClient.AnswerCallbackQueryAsync(callback.Id);
+                }
+                else if (data == "menu_agendar")
+                {
+                    var especialidades = EspecialidadBLL.ObtenerTodas();
+                    var opciones = especialidades.Select(esp =>
+                        new[] { InlineKeyboardButton.WithCallbackData(esp.Nombre, $"especialidad_{esp.Id}") }).ToList();
+
+                    EstadoChat[chatIdCb] = "seleccionando_especialidad";
+
+                    await BotClient.SendTextMessageAsync(
+                        chatIdCb,
+                        "🔍 Selecciona una especialidad:",
+                        replyMarkup: new InlineKeyboardMarkup(opciones)
+                    );
+                    await BotClient.AnswerCallbackQueryAsync(callback.Id);
+                }
+                else if (data.StartsWith("especialidad_"))
+                {
+                    var especialidadId = long.Parse(data.Split('_')[1]);
+                    var especialidadSeleccionada = EspecialidadBLL.ObtenerEspecialidadPorId(especialidadId);
+                    var medicos = MedicoBLL.ObtenerPorEspecialidad(especialidadSeleccionada);
+
+                    var inlineMedicos = new List<InlineKeyboardButton[]>();
+                    foreach (var medico in medicos)
+                    {
+                        inlineMedicos.Add(new[]
+                        {
+                    InlineKeyboardButton.WithCallbackData($"Dr. {medico.Nombre}", $"medico_{medico.Cedula}")
+                });
+                    }
+
+                    await BotClient.SendTextMessageAsync(
+                        chatIdCb,
+                        $"🩺 Especialidad seleccionada: {especialidadSeleccionada.Nombre}\nAhora selecciona un médico:",
+                        replyMarkup: new InlineKeyboardMarkup(inlineMedicos)
+                    );
+                }
+                else if (data.StartsWith("medico_"))
+                {
+                    string idMedico = data.Split('_')[1];
+                    var medico = MedicoBLL.ObtenerMedico(idMedico);
+                    if (medico == null)
+                    {
+                        await BotClient.SendTextMessageAsync(chatIdCb, "❌ Error: no se encontró el médico.");
+                        return;
+                    }
+
+                    DateTime hoy = DateTime.Today;
+                    int diasRestantes = DateTime.DaysInMonth(hoy.Year, hoy.Month) - hoy.Day + 1;
+
+                    var inlineFechas = new List<InlineKeyboardButton[]>();
+                    for (int i = 0; i < diasRestantes; i++)
+                    {
+                        DateTime fecha = hoy.AddDays(i);
+                        string textoFecha = fecha.ToString("dd/MM/yyyy");
+                        string callbackData = $"fecha_{idMedico}_{fecha:yyyyMMdd}";
+
+                        inlineFechas.Add(new[] { InlineKeyboardButton.WithCallbackData(textoFecha, callbackData) });
+                    }
+
+                    if (!AgendaTemporal.ContainsKey(chatIdCb))
+                        AgendaTemporal[chatIdCb] = new Cita();
+
+                    AgendaTemporal[chatIdCb].Medico = medico;
+
+                    await BotClient.SendTextMessageAsync(
+                        chatIdCb,
+                        $"🧑‍⚕️ Médico seleccionado: {medico.Nombre}\nSelecciona una fecha:",
+                        replyMarkup: new InlineKeyboardMarkup(inlineFechas)
+                    );
+                }
+                else if (data.StartsWith("hora_"))
+                {
+                    var horaStr = data.Split('_')[1];
+                    if (AgendaTemporal.TryGetValue(chatIdCb, out var cita))
+                    {
+                        if (TimeSpan.TryParse(horaStr, out var hora))
+                        {
+                            cita.Hora = hora;
+
+                            EstadoChat[chatIdCb] = "esperando_confirmacion";
+
+                            var confirmButtons = new InlineKeyboardMarkup(new[]
+                            {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData("✅ Confirmar", "confirmar_cita"),
+                    InlineKeyboardButton.WithCallbackData("❌ Cancelar", "cancelar_cita")
+                }
+            });
+
+                            await BotClient.SendTextMessageAsync(chatIdCb,
+                                $"📋 Confirma tu cita:\n👨‍⚕️ Médico: {cita.Medico?.Nombre}\n📅 Fecha: {cita.Fecha:dd/MM/yyyy}\n🕓 Hora: {cita.Hora}\n\n¿Deseas confirmar?",
+                                replyMarkup: confirmButtons
+                            );
+                        }
+                    }
+                }
+
+                else if (data == "confirmar_cita")
+                {
+                    if (AgendaTemporal.TryGetValue(chatIdCb, out var citaConfirmada))
+                    {
+                        CitaBLL.AgendarCita(citaConfirmada);
+
+                        await BotClient.SendTextMessageAsync(chatIdCb, $"✅ Tu cita fue agendada con éxito:\n📅 Fecha: {citaConfirmada.Fecha:dd/MM/yyyy}\n🕓 Hora: {citaConfirmada.Hora}\n👨‍⚕️ Médico: {citaConfirmada.Medico.Nombre}");
+
+                        AgendaTemporal.Remove(chatIdCb);
+                        EstadoChat[chatIdCb] = "preguntar_menu";
+                        await EnviarPreguntaMenu(chatIdCb);
+                    }
+                   
+
+                    await BotClient.AnswerCallbackQueryAsync(callback.Id);
+                }
+                else if (data == "cancelar_cita")
+                {
+                    AgendaTemporal.Remove(chatIdCb);
+                    EstadoChat[chatIdCb] = "preguntar_menu";
+
+                    await BotClient.SendTextMessageAsync(chatIdCb, "❌ Cita cancelada.");
+                    await EnviarPreguntaMenu(chatIdCb);
+
+                    await BotClient.AnswerCallbackQueryAsync(callback.Id);
+                }
+
+
+                else if (data.StartsWith("fecha_"))
+                {
+                    var parts = data.Split('_');
+                    var fechaStr = parts[2];
+                    if (DateTime.TryParseExact(fechaStr, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var fecha))
+                    {
+                        if (AgendaTemporal.TryGetValue(chatIdCb, out var cita))
+                        {
+                            cita.Fecha = fecha;
+
+                            var horarios = CitaBLL.ObtenerHorariosDisponibles(cita.Medico, fecha);
+                            var botones = horarios.Select(h =>
+                                new[] { InlineKeyboardButton.WithCallbackData(h.ToString(@"hh\:mm"), $"hora_{h}") }).ToList();
+
+                            EstadoChat[chatIdCb] = "esperando_hora";
+
+                            await BotClient.SendTextMessageAsync(
+                                chatIdCb,
+                                $"📅 Fecha seleccionada: {fecha:dd/MM/yyyy}\nSelecciona una hora disponible:",
+                                replyMarkup: new InlineKeyboardMarkup(botones)
+                            );
+                        }
+                    }
+                }
+
+
             }
         }
 
+        // Método auxiliar para preguntar si quiere volver al menú o salir
+        private async Task EnviarPreguntaMenu(long chatId)
+        {
+            var inlinePregunta = new InlineKeyboardMarkup(new[]
+            {
+        new[] { InlineKeyboardButton.WithCallbackData("Volver al menú", "volver_menu") }
+    });
+
+            await BotClient.SendTextMessageAsync(
+                chatId: chatId,
+                text: "¿Quieres volver al menú principal?",
+                replyMarkup: inlinePregunta
+            );
+        }
+
+
+        private Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
+        {
+            Console.WriteLine($"❌ Error en el bot: {exception}");
+            return Task.CompletedTask;
+        }
     }
 }
