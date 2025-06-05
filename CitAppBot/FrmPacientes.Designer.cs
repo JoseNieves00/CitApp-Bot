@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            label4 = new Label();
             dtgvPacientes = new DataGridView();
             comboBoxVerPacientes = new ComboBox();
             label2 = new Label();
-            label1 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtgvPacientes).BeginInit();
             SuspendLayout();
@@ -40,62 +40,60 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.GradientActiveCaption;
+            panel1.Controls.Add(label4);
             panel1.Controls.Add(dtgvPacientes);
             panel1.Controls.Add(comboBoxVerPacientes);
             panel1.Controls.Add(label2);
-            panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1077, 783);
+            panel1.Size = new Size(583, 598);
             panel1.TabIndex = 1;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = SystemColors.GradientActiveCaption;
+            label4.Font = new Font("Cambria", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(156, 38);
+            label4.Name = "label4";
+            label4.Size = new Size(215, 52);
+            label4.TabIndex = 7;
+            label4.Text = "Pacientes";
             // 
             // dtgvPacientes
             // 
             dtgvPacientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgvPacientes.Location = new Point(363, 54);
+            dtgvPacientes.Location = new Point(8, 223);
+            dtgvPacientes.Margin = new Padding(2);
             dtgvPacientes.Name = "dtgvPacientes";
             dtgvPacientes.RowHeadersWidth = 72;
-            dtgvPacientes.Size = new Size(672, 696);
+            dtgvPacientes.Size = new Size(570, 208);
             dtgvPacientes.TabIndex = 4;
             // 
             // comboBoxVerPacientes
             // 
             comboBoxVerPacientes.FormattingEnabled = true;
-            comboBoxVerPacientes.Location = new Point(44, 318);
-            comboBoxVerPacientes.Margin = new Padding(4);
+            comboBoxVerPacientes.Location = new Point(65, 164);
             comboBoxVerPacientes.Name = "comboBoxVerPacientes";
-            comboBoxVerPacientes.Size = new Size(274, 38);
+            comboBoxVerPacientes.Size = new Size(184, 28);
             comboBoxVerPacientes.TabIndex = 3;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(44, 262);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(65, 126);
             label2.Name = "label2";
-            label2.Size = new Size(48, 30);
+            label2.Size = new Size(33, 20);
             label2.TabIndex = 2;
             label2.Text = "Ver:";
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(94, 54);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(100, 30);
-            label1.TabIndex = 1;
-            label1.Text = "Pacientes";
-            // 
             // FrmPacientes
             // 
-            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1077, 783);
+            ClientSize = new Size(583, 598);
             Controls.Add(panel1);
-            Margin = new Padding(4);
             Name = "FrmPacientes";
             Text = "FrmPacientes";
             Load += FrmPacientes_Load;
@@ -110,7 +108,7 @@
         private Panel panel1;
         private ComboBox comboBoxVerPacientes;
         private Label label2;
-        private Label label1;
         private DataGridView dtgvPacientes;
+        private Label label4;
     }
 }
