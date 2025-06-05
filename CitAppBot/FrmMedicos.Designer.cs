@@ -28,90 +28,98 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
-            dtgvMedicos = new DataGridView();
-            comboBoxVerMedicos = new ComboBox();
-            label2 = new Label();
             label1 = new Label();
-            panel1.SuspendLayout();
+            label2 = new Label();
+            comboBoxVerMedicos = new ComboBox();
+            dtgvMedicos = new DataGridView();
+            panel1 = new Panel();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)dtgvMedicos).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(63, 36);
+            label1.Name = "label1";
+            label1.Size = new Size(0, 20);
+            label1.TabIndex = 1;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(48, 155);
+            label2.Name = "label2";
+            label2.Size = new Size(33, 20);
+            label2.TabIndex = 2;
+            label2.Text = "Ver:";
+            // 
+            // comboBoxVerMedicos
+            // 
+            comboBoxVerMedicos.FormattingEnabled = true;
+            comboBoxVerMedicos.Location = new Point(48, 192);
+            comboBoxVerMedicos.Name = "comboBoxVerMedicos";
+            comboBoxVerMedicos.Size = new Size(184, 28);
+            comboBoxVerMedicos.TabIndex = 3;
+            // 
+            // dtgvMedicos
+            // 
+            dtgvMedicos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtgvMedicos.Location = new Point(48, 245);
+            dtgvMedicos.Margin = new Padding(2);
+            dtgvMedicos.Name = "dtgvMedicos";
+            dtgvMedicos.RowHeadersWidth = 72;
+            dtgvMedicos.Size = new Size(451, 204);
+            dtgvMedicos.TabIndex = 4;
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.GradientActiveCaption;
+            panel1.Controls.Add(label4);
             panel1.Controls.Add(dtgvMedicos);
             panel1.Controls.Add(comboBoxVerMedicos);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1120, 879);
+            panel1.Size = new Size(565, 609);
             panel1.TabIndex = 1;
             // 
-            // dtgvMedicos
+            // label4
             // 
-            dtgvMedicos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgvMedicos.Location = new Point(372, 54);
-            dtgvMedicos.Name = "dtgvMedicos";
-            dtgvMedicos.RowHeadersWidth = 72;
-            dtgvMedicos.Size = new Size(722, 787);
-            dtgvMedicos.TabIndex = 4;
-            // 
-            // comboBoxVerMedicos
-            // 
-            comboBoxVerMedicos.FormattingEnabled = true;
-            comboBoxVerMedicos.Location = new Point(44, 318);
-            comboBoxVerMedicos.Margin = new Padding(4);
-            comboBoxVerMedicos.Name = "comboBoxVerMedicos";
-            comboBoxVerMedicos.Size = new Size(274, 38);
-            comboBoxVerMedicos.TabIndex = 3;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(44, 262);
-            label2.Margin = new Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(48, 30);
-            label2.TabIndex = 2;
-            label2.Text = "Ver:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(94, 54);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(91, 30);
-            label1.TabIndex = 1;
-            label1.Text = "Médicos";
+            label4.AutoSize = true;
+            label4.BackColor = SystemColors.GradientActiveCaption;
+            label4.Font = new Font("Cambria", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(135, 36);
+            label4.Name = "label4";
+            label4.Size = new Size(188, 52);
+            label4.TabIndex = 8;
+            label4.Text = "Médicos";
             // 
             // FrmMedicos
             // 
-            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1120, 879);
+            ClientSize = new Size(565, 609);
             Controls.Add(panel1);
-            Margin = new Padding(4);
             Name = "FrmMedicos";
             Text = "FrmMedicos";
             Load += FrmMedicos_Load;
+            ((System.ComponentModel.ISupportInitialize)dtgvMedicos).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dtgvMedicos).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel panel1;
-        private ComboBox comboBoxVerMedicos;
-        private Label label2;
-        private Label label1;
         private VScrollBar vScrollBarMedicos;
+        private Label label1;
+        private Label label2;
+        private ComboBox comboBoxVerMedicos;
         private DataGridView dtgvMedicos;
+        private Panel panel1;
+        private Label label4;
     }
 }

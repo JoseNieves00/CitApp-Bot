@@ -19,6 +19,8 @@ namespace CitAppBot
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            Application.EnableVisualStyles();
             Application.Run(new FrmLogin());
         }
 

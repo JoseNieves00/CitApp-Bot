@@ -30,11 +30,11 @@
         {
             components = new System.ComponentModel.Container();
             panel1 = new Panel();
+            label4 = new Label();
             dtgvCitas = new DataGridView();
             citaBLLBindingSource = new BindingSource(components);
             comboBoxVerCitas = new ComboBox();
             label2 = new Label();
-            label1 = new Label();
             sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtgvCitas).BeginInit();
@@ -44,28 +44,39 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.GradientActiveCaption;
+            panel1.Controls.Add(label4);
             panel1.Controls.Add(dtgvCitas);
             panel1.Controls.Add(comboBoxVerCitas);
             panel1.Controls.Add(label2);
-            panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1074, 802);
+            panel1.Size = new Size(553, 536);
             panel1.TabIndex = 0;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = SystemColors.GradientActiveCaption;
+            label4.Font = new Font("Cambria", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(80, 37);
+            label4.Name = "label4";
+            label4.Size = new Size(121, 52);
+            label4.TabIndex = 8;
+            label4.Text = "Citas";
             // 
             // dtgvCitas
             // 
             dtgvCitas.AutoGenerateColumns = false;
             dtgvCitas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtgvCitas.DataSource = citaBLLBindingSource;
-            dtgvCitas.Location = new Point(346, 54);
+            dtgvCitas.Location = new Point(5, 233);
+            dtgvCitas.Margin = new Padding(2);
             dtgvCitas.Name = "dtgvCitas";
             dtgvCitas.ReadOnly = true;
             dtgvCitas.RowHeadersWidth = 72;
             dtgvCitas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dtgvCitas.Size = new Size(673, 712);
+            dtgvCitas.Size = new Size(549, 206);
             dtgvCitas.TabIndex = 4;
             // 
             // citaBLLBindingSource
@@ -75,31 +86,19 @@
             // comboBoxVerCitas
             // 
             comboBoxVerCitas.FormattingEnabled = true;
-            comboBoxVerCitas.Location = new Point(44, 318);
-            comboBoxVerCitas.Margin = new Padding(4);
+            comboBoxVerCitas.Location = new Point(55, 182);
             comboBoxVerCitas.Name = "comboBoxVerCitas";
-            comboBoxVerCitas.Size = new Size(274, 38);
+            comboBoxVerCitas.Size = new Size(184, 28);
             comboBoxVerCitas.TabIndex = 3;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(44, 262);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(55, 145);
             label2.Name = "label2";
-            label2.Size = new Size(48, 30);
+            label2.Size = new Size(33, 20);
             label2.TabIndex = 2;
             label2.Text = "Ver:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(94, 54);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(58, 30);
-            label1.TabIndex = 1;
-            label1.Text = "Citas";
             // 
             // sqlCommand1
             // 
@@ -108,11 +107,10 @@
             // 
             // FrmCitas
             // 
-            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1074, 802);
+            ClientSize = new Size(553, 536);
             Controls.Add(panel1);
-            Margin = new Padding(4);
             Name = "FrmCitas";
             Text = "FrmCitas";
             Load += FrmCitas_Load;
@@ -126,12 +124,12 @@
         #endregion
 
         private Panel panel1;
-        private Label label1;
         private VScrollBar vScrollBarCitas;
         private ComboBox comboBoxVerCitas;
         private Label label2;
         private DataGridView dtgvCitas;
         private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
         private BindingSource citaBLLBindingSource;
+        private Label label4;
     }
 }
