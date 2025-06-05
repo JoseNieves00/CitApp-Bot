@@ -61,7 +61,7 @@ namespace CitAppBot
             panelMenu.Dock = DockStyle.Left;
             panelMenu.Location = new Point(0, 0);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(220, 520);
+            panelMenu.Size = new Size(220, 751);
             panelMenu.TabIndex = 0;
             // 
             // IBagregarmedico
@@ -215,7 +215,7 @@ namespace CitAppBot
             PanelTtl.Dock = DockStyle.Top;
             PanelTtl.Location = new Point(220, 0);
             PanelTtl.Name = "PanelTtl";
-            PanelTtl.Size = new Size(833, 80);
+            PanelTtl.Size = new Size(566, 80);
             PanelTtl.TabIndex = 1;
             // 
             // TituloHijo
@@ -245,18 +245,19 @@ namespace CitAppBot
             // 
             // panelDesktop
             // 
+            panelDesktop.AutoSize = true;
             panelDesktop.BackColor = SystemColors.GradientActiveCaption;
             panelDesktop.Dock = DockStyle.Fill;
             panelDesktop.Location = new Point(220, 80);
             panelDesktop.Name = "panelDesktop";
-            panelDesktop.Size = new Size(833, 440);
+            panelDesktop.Size = new Size(566, 671);
             panelDesktop.TabIndex = 2;
             // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1053, 520);
+            ClientSize = new Size(786, 751);
             Controls.Add(panelDesktop);
             Controls.Add(PanelTtl);
             Controls.Add(panelMenu);
@@ -270,6 +271,7 @@ namespace CitAppBot
             PanelTtl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)iconPictureChild).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
 

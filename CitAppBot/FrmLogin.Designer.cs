@@ -49,7 +49,7 @@
             panel1.Controls.Add(label1);
             panel1.Location = new Point(12, 35);
             panel1.Name = "panel1";
-            panel1.Size = new Size(454, 593);
+            panel1.Size = new Size(499, 593);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
             // 
@@ -67,18 +67,18 @@
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(219, 258);
+            txtPassword.Location = new Point(253, 258);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(209, 39);
+            txtPassword.Size = new Size(209, 30);
             txtPassword.TabIndex = 3;
             txtPassword.KeyDown += txtPassword_KeyDown;
             // 
             // txtUser
             // 
-            txtUser.Location = new Point(219, 188);
+            txtUser.Location = new Point(253, 189);
             txtUser.Name = "txtUser";
-            txtUser.Size = new Size(209, 39);
+            txtUser.Size = new Size(209, 30);
             txtUser.TabIndex = 2;
             // 
             // label3
@@ -88,7 +88,7 @@
             label3.ForeColor = SystemColors.Control;
             label3.Location = new Point(29, 253);
             label3.Name = "label3";
-            label3.Size = new Size(247, 48);
+            label3.Size = new Size(176, 36);
             label3.TabIndex = 1;
             label3.Text = "Contraseña:";
             // 
@@ -99,7 +99,7 @@
             label2.ForeColor = SystemColors.Control;
             label2.Location = new Point(77, 183);
             label2.Name = "label2";
-            label2.Size = new Size(176, 48);
+            label2.Size = new Size(127, 36);
             label2.TabIndex = 1;
             label2.Text = "Usuario:";
             // 
@@ -109,16 +109,16 @@
             label1.Font = new Font("Microsoft Sans Serif", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(148, 61);
             label1.Name = "label1";
-            label1.Size = new Size(202, 64);
+            label1.Size = new Size(143, 46);
             label1.TabIndex = 0;
             label1.Text = "LOGIN";
             label1.Click += label1_Click;
             // 
             // FrmLogin
             // 
-            AutoScaleDimensions = new SizeF(16F, 32F);
+            AutoScaleDimensions = new SizeF(12F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(488, 665);
+            ClientSize = new Size(523, 665);
             Controls.Add(panel1);
             Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4, 3, 4, 3);
